@@ -26,10 +26,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from config.config import args_parser
 from data.preprocessing import load_and_preprocess
+from data.partition import get_task_schedule, partition_data_by_task, partition_data_non_iid, assign_clients_to_edges
 from data.dataset import NetFlowDataset
-from data.partition import partition_data_non_iid, assign_clients_to_edges
 from models.feature_extractor import CNN1DFeatureExtractor, LeNetTabular, weights_init
 from models.network import HFINNetwork
+from models.der_network import DERNetwork
 from federated.client import HFINClient
 from federated.edge_server import EdgeServer
 from federated.cloud_server import CloudServer
@@ -92,93 +93,95 @@ def main():
     logger.info('='*60)
     logger.info(f'Device: {args.device}')
     logger.info(f'Dataset: {args.dataset}')
+    logger.info(f'Method: {args.method.upper()}')
     logger.info(f'Clients: {args.num_clients}, Edge Servers: {args.num_edge_servers}')
     logger.info(f'Base classes: {args.num_base_classes}, Task size: {args.task_size}')
     logger.info(f'Total classes: {args.total_classes}')
     
-    # === Load & Tiền xử lý dữ liệu ===
-    logger.info('\n[1/4] Loading dataset...')
-    max_samples = 50000 if args.debug else args.max_samples
+    # === Load & Tiền xử lý dữ liệu tự động ===
+    logger.info('\n[1/4] Loading and preprocessing dataset...')
+    # Sử dụng logic gốc
     X_train, X_test, y_train, y_test, scaler, label_map = load_and_preprocess(
-        args.data_path, args.dataset, max_samples=max_samples
+        data_path=args.data_path,
+        dataset_name=args.dataset,
+        test_size=args.test_size,
+        random_state=args.seed,
+        max_samples=args.max_samples
     )
+    
     num_features = X_train.shape[1]
-    # QUAN TRONG: dem so class ID duy nhat, KHONG dung len(label_map)
-    # vi label_map co alias (backdoor/backdoors, infiltration/infilteration)
-    num_unique_classes = len(set(label_map.values()))
-    if args.total_classes != num_unique_classes:
-        logger.warning(
-            f'CANH BAO: total_classes trong config ({args.total_classes}) != '
-            f'so class ID duy nhat ({num_unique_classes}). Dung {num_unique_classes}.'
-        )
-        args.total_classes = num_unique_classes
-    logger.info(f'Features: {num_features}, Train: {len(X_train)}, Test: {len(X_test)}')
-    logger.info(f'Total classes (unique IDs): {args.total_classes}')
-    logger.info(f'Label map ({len(label_map)} names -> {args.total_classes} unique IDs): {label_map}')
+    args.total_classes = len(label_map)
+    
+    logger.info(f'Features: {num_features}, Global Test: {len(X_test)}')
+    logger.info(f'Total classes: {args.total_classes} | Clients: {args.num_clients} | Edges: {args.num_edge_servers}')
     
     # Test dataset (dùng chung cho đánh giá)
     test_dataset = NetFlowDataset(X_test, y_test)
     
     # === Phân chia dữ liệu cho clients ===
-    logger.info('\n[2/4] Partitioning data to clients...')
-    # Phân phối Dirichlet theo Mục VI.B: Alpha = 0.3 (Benign: 0), Alpha = 0.8 (Attack: >0)
-    alpha_config = {0: args.alpha_benign} # Lớp 0 (Benign) dùng alpha_benign=0.3
-    # Các lớp khác tự động dùng alpha_attack=0.8 trong logic partition_data_non_iid
+    logger.info(f'\n[2/4] Mapping {args.num_clients} FL Clients to {args.num_edge_servers} Edge Server(s)...')
     
-    client_data_indices, client_classes = partition_data_non_iid(
-        y_train, args.num_clients, alpha=alpha_config, seed=args.seed
-    )
-    
-    # Gán clients vào edge servers
+    # === Phân chia dữ liệu cho clients ===
+    logger.info(f'\n[2/4] Mapping {args.num_clients} FL Clients to {args.num_edge_servers} Edge Servers...')
     edge_client_map = assign_clients_to_edges(args.num_clients, args.num_edge_servers)
     logger.info(f'Edge-Client mapping: {edge_client_map}')
     
-    # === Khởi tạo models & components ===
+    # === Khoi tao models & components ===
     logger.info('\n[3/4] Initializing models...')
     feature_extractor = CNN1DFeatureExtractor(
         input_dim=num_features,
         output_dim=args.feature_dim
     )
-    
-    # Encode model (cho prototype gradient)
+
+    # Global model: DERNetwork cho DER, HFINNetwork cho iCaRL/WA
+    if args.method in ('der', 'der++'):
+        model_g = DERNetwork(input_dim=num_features, feature_dim=args.feature_dim)
+        model_g.update_fc(args.num_base_classes)   # them backbone base
+        logger.info(f'[DER] DERNetwork initialized: 1 backbone, {args.num_base_classes} classes')
+    else:
+        model_g = HFINNetwork(args.num_base_classes, copy.deepcopy(feature_extractor))
+    model_g = model_to_device(model_g, args.device)
+
+    # Tao clients (Data Providers)
+    clients_dict = {}
+    for c_id in range(args.num_clients):
+        client = HFINClient(
+            client_id=c_id,
+            train_data=np.array([]),
+            train_labels=np.array([]),
+            device=args.device
+        )
+        clients_dict[c_id] = client
+
+    # Tao edge servers (Local Trainers)
+    edge_servers = []
+    for e_id in range(args.num_edge_servers):
+        edge = EdgeServer(
+            edge_id=e_id,
+            num_classes=args.num_base_classes,
+            feature_extractor=copy.deepcopy(feature_extractor),
+            device=args.device,
+            memory_size=args.memory_size,
+            task_size=args.task_size,
+            method=args.method,
+            der_alpha=args.der_alpha,
+            der_beta=args.der_beta,
+            max_samples_per_class=args.max_samples_per_class,
+            downsample_ratio=args.downsample_ratio,
+            input_dim=num_features,
+            feature_dim=args.feature_dim,
+        )
+        edge.set_clients(edge_client_map[e_id])
+        edge_servers.append(edge)
+
+    # === Cloud server: dung model_g de init ===
+    # DER: CloudServer chi luu model_g lam reference; FedAvg chay binh thuong
     encode_model = LeNetTabular(
         input_dim=num_features,
         hidden_dim=128,
         num_classes=args.total_classes
     )
     encode_model.apply(weights_init)
-    
-    # Global model
-    model_g = HFINNetwork(args.num_base_classes, copy.deepcopy(feature_extractor))
-    model_g = model_to_device(model_g, args.device)
-    
-    # Tạo clients (Data Providers)
-    clients_dict = {}
-    for c_id in range(args.num_clients):
-        indices = client_data_indices[c_id]
-        client = HFINClient(
-            client_id=c_id,
-            train_data=X_train[indices],
-            train_labels=y_train[indices],
-            device=args.device
-        )
-        clients_dict[c_id] = client
-    
-    # Tạo edge servers (Local Trainers)
-    edge_servers = []
-    for e_id in range(args.num_edge_servers):
-        edge = EdgeServer(
-            edge_id=e_id, 
-            num_classes=args.num_base_classes,
-            feature_extractor=copy.deepcopy(feature_extractor),
-            device=args.device,
-            memory_size=args.memory_size,
-            task_size=args.task_size
-        )
-        edge.set_clients(edge_client_map[e_id])
-        edge_servers.append(edge)
-    
-    # === Cloud server ===
     cloud_server = CloudServer(
         num_classes=args.num_base_classes,
         feature_extractor=copy.deepcopy(feature_extractor),
@@ -190,8 +193,11 @@ def main():
     # === Training Loop (Task-based) ===
     logger.info('\n[4/4] Starting training...')
     accuracy_history = []
+    precision_history = []
+    recall_history = []
     f1_macro_history = []
     f1_weighted_history = []
+    loss_history = []
     eval_round_history = []
     task_progress_history = []
     
@@ -200,23 +206,63 @@ def main():
     current_f1_scores = {i: 0.9 for i in range(args.total_classes)}
     global_round = 0  # Bộ đếm round tổng (để log)
 
-    # Xây dựng danh sách tasks từ task_schedule
-    # Mỗi task là một list class IDs, ví dụ: [[0,1], [2,3], [4,5], [6,7], [8,9]]
-    from data.partition import get_task_schedule
+    # Phân chia Task tự động theo bài báo
     all_task_classes = get_task_schedule(args.dataset, args.task_schedule)
     num_tasks = len(all_task_classes)
+    
+    # Đảo ngược label_map để in report đẹp hơn
+    inv_label_map = {v: k for k, v in label_map.items()}
+    # Nếu label_map có string keys, ta sẽ dùng trực tiếp cho report
 
     for task_id, task_classes in enumerate(all_task_classes):
+        logger.info(f'\nPartitioning data for Task {task_id} (Classes: {task_classes})...')
+        
+        # Phân chia dữ liệu train cho các clients theo task
+        client_data_indices, _ = partition_data_by_task(
+            y_train=y_train,
+            task_classes=task_classes,
+            num_clients=args.num_clients,
+            alpha=None, # Tự động dùng 0.3 cho benign, 0.8 cho attack
+            seed=args.seed + task_id
+        )
+        
+        # Đẩy dữ liệu vào Clients
+        for cid, client in clients_dict.items():
+            idx = client_data_indices.get(cid, [])
+            if len(idx) > 0:
+                client.train_data = torch.tensor(X_train[idx], dtype=torch.float32)
+                client.train_labels = torch.tensor(y_train[idx], dtype=torch.long)
+            else:
+                client.train_data = torch.zeros((0, num_features), dtype=torch.float32)
+                client.train_labels = torch.zeros(0, dtype=torch.long)
+        
+        # Rút gọn dữ liệu cho debug mode
+        if args.debug and args.max_samples > 0:
+            for cid, client in clients_dict.items():
+                if len(client.train_data) > args.max_samples:
+                    client.train_data = client.train_data[:args.max_samples]
+                    client.train_labels = client.train_labels[:args.max_samples]
+        
         # Số rounds cho task này (Sec VI.B)
         num_rounds = args.epochs_base if task_id == 0 else args.epochs_incremental
 
         # Cập nhật số lớp đã học
         classes_learned = len(task_classes) if task_id == 0 else classes_learned + len(task_classes)
 
-        # Mở rộng Classification Head nếu cần
-        if classes_learned > model_g.fc.out_features:
-            model_g.Incremental_learning(classes_learned)
-            logger.info(f'Expanded global model to {classes_learned} classes for Task {task_id}')
+        # Mo rong model: DERNetwork them backbone moi, HFINNetwork mo rong fc head
+        if classes_learned > model_g.out_features:
+            if isinstance(model_g, DERNetwork):
+                # DER: them 1 backbone CNN moi cho task nay (dynamic expansion)
+                model_g.update_fc(classes_learned)
+                logger.info(
+                    f'[DER] Added backbone {len(model_g.convnets)}, '
+                    f'total features={model_g.total_feature_dim}, '
+                    f'classes={classes_learned} for Task {task_id}'
+                )
+            else:
+                # iCaRL / WA: chi mo rong fc head
+                model_g.Incremental_learning(classes_learned)
+                logger.info(f'Expanded global model to {classes_learned} classes for Task {task_id}')
 
         # Đồng bộ kiến trúc sang Cloud & Edge
         model_g = model_to_device(model_g, args.device)
@@ -280,12 +326,18 @@ def main():
             if is_first_round or is_eval_round or is_last_round_of_task:
                 results_eval = evaluate_model(model_g, test_dataset, range(classes_learned), args.device)
                 acc = results_eval['accuracy']
+                precision = results_eval['precision']
+                recall = results_eval['recall']
                 f1_macro = results_eval['f1_macro']
                 f1_weighted = results_eval['f1_weighted']
+                loss = results_eval['loss']
                 
                 accuracy_history.append(acc)
+                precision_history.append(precision)
+                recall_history.append(recall)
                 f1_macro_history.append(f1_macro)
                 f1_weighted_history.append(f1_weighted)
+                loss_history.append(loss)
                 eval_round_history.append(global_round)
                 
                 # Tính toán Task progress: task_id + (round_hien_tai / tong_so_round_cua_task)
@@ -294,10 +346,13 @@ def main():
                 task_progress_history.append(task_progress)
                 
                 logger.info(
-                    f'  [Eval] Task {task_id}, Round {round_in_task + 1}: '
-                    f'Accuracy = {acc:.2f}%  '
-                    f'Macro-F1 = {f1_macro:.2f}%  '
-                    f'Weighted-F1 = {f1_weighted:.2f}%'
+                    f'  [Eval] Task {task_id}, R {round_in_task + 1}: '
+                    f'Acc: {acc:.2f}% | '
+                    f'Prec: {precision:.2f}% | '
+                    f'Recall: {recall:.2f}% | '
+                    f'Ma-F1: {f1_macro:.2f}% | '
+                    f'We-F1: {f1_weighted:.2f}% | '
+                    f'Loss: {loss:.4f}'
                 )
 
                 # Lưu accuracy phục vụ tính Forgetting
@@ -305,14 +360,13 @@ def main():
                     i: f1 for i, f1 in enumerate(results_eval['per_class_f1'])
                 }
 
-                # Cập nhật F1 scores cho WTO ở round tiếp theo
-                current_f1_scores = {
-                    i: float(f1) for i, f1 in enumerate(results_eval['per_class_f1'])
-                }
+                # Cập nhật F1 scores cho WTO ở round tiếp theo (không ghi đè lớp cũ)
+                for i, f1 in enumerate(results_eval['per_class_f1']):
+                    current_f1_scores[i] = float(f1)
 
         # === SAU KHI KẾT THÚC CÁC VÒNG CỦA TASK: WA (Weight Aligning) ===
-        # Theo Section IV.C: WA dùng để loại bỏ bias sau quá trình local training
-        if task_id > 0:
+        # Theo Section IV.C: WA là cơ chế căn chỉnh trọng số cho iCaRL, chạy với method 'wa'
+        if task_id > 0 and args.method == 'wa':
             # Diagnostic: Log weight norms before WA
             with torch.no_grad():
                 weights = model_g.fc.weight.data
@@ -368,18 +422,44 @@ def main():
     results = evaluate_model(model_g, test_dataset, final_classes, args.device)
     print_evaluation_report(results, "FINAL", label_map, logger)
     
-    # Vẽ biểu đồ tổng hợp Metrics (Sử dụng Task progression trên trục X)
-    metrics_dict = {
+    # Lưu metrics mỗi round ra CSV
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    csv_path = os.path.join(args.log_dir, f'metrics_round_by_round_{args.method}.csv')
+    df = pd.DataFrame({
+        'Global_Round': eval_round_history,
+        'Task_Progress': task_progress_history,
         'Accuracy': accuracy_history,
+        'Precision': precision_history,
+        'Recall': recall_history,
         'Macro-F1': f1_macro_history,
-        'Weighted-F1': f1_weighted_history
-    }
-    plot_metrics_curves(
-        task_progress_history, metrics_dict, 
-        os.path.join(args.log_dir, 'metrics_overall.png'),
-        xlabel='Task',
-        dataset_name=args.dataset
-    )
+        'Weighted-F1': f1_weighted_history,
+        'Loss': loss_history
+    })
+    df.to_csv(csv_path, index=False)
+    logger.info(f'Đã lưu tiến độ huấn luyện vào CSV: {csv_path}')
+    
+    # Hàm vẽ biểu đồ riêng biệt cho từng loại metric để dễ so sánh
+    def save_single_plot(x_vals, y_vals, metric_name, color, marker):
+        plt.figure(figsize=(10, 6))
+        plt.plot(x_vals, y_vals, f'{color}-{marker}', linewidth=2, markersize=4)
+        plt.xlabel('Task Progression')
+        plt.ylabel(f'{metric_name} (%)' if metric_name != 'Loss' else 'Loss')
+        plt.title(f'[{args.method.upper()}] {metric_name} over Tasks ({args.dataset})')
+        plt.grid(True, alpha=0.3)
+        plt.tight_layout()
+        safe_name = metric_name.lower().replace("-", "_")
+        plt.savefig(os.path.join(args.log_dir, f'{args.method}_{safe_name}.png'), dpi=150)
+        plt.close()
+
+    # Vẽ riêng từng metric
+    save_single_plot(task_progress_history, accuracy_history, 'Accuracy', 'b', 'o')
+    save_single_plot(task_progress_history, precision_history, 'Precision', 'c', 's')
+    save_single_plot(task_progress_history, recall_history, 'Recall', 'm', 'd')
+    save_single_plot(task_progress_history, f1_macro_history, 'Macro-F1', 'g', '^')
+    save_single_plot(task_progress_history, f1_weighted_history, 'Weighted-F1', 'r', 'v')
+    save_single_plot(task_progress_history, loss_history, 'Loss', 'k', 'X')
     
     inv_label_map = {v: k for k, v in label_map.items()}
     class_names = [inv_label_map.get(i, f'Class {i}') for i in final_classes]

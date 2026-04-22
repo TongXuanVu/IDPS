@@ -28,7 +28,6 @@ TASK_CONFIGS = {
         'default_schedule': 'task2'
     },
     # --- NF-UQ-NIDS-v2: 20 class (1 Benign + 19 attack) ---
-    # ID thực tế trong data: 0-19 (label_map: web-sql/bfa/xss đều → 20, nhưng 20 không tồn tại)
     'nf_uq_nids': {
         'total_classes': 20,
         'schedules': {
@@ -37,6 +36,16 @@ TASK_CONFIGS = {
             'task10': {'base': 10, 'step': 10, 'num_tasks': 1},  # 10 + 10 = 20
         },
         'default_schedule': 'task2'
+    },
+    # --- CIC-IoT23: 34 class | 6 tasks sequential (FL partition mới) ---
+    # Task 1-4: 6 nhãn mỗi task | Task 5-6: 5 nhãn mỗi task
+    # Labels: [0-5] → [6-11] → [12-17] → [18-23] → [24-28] → [29-33]
+    'cic_iot23': {
+        'total_classes': 34,
+        'schedules': {
+            'task6': {'base': 6, 'step': 6, 'num_tasks': 5},   # 6 + 6*3 + 5*2 = 34 (approx)
+        },
+        'default_schedule': 'task6'
     }
 }
 

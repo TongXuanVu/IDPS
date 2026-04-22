@@ -23,11 +23,6 @@ logs/
 # Plots & visualizations
 plots/
 
-# Reference code
-MalCL/
-papers/
-paper/
-
 # Progress report MDs (local only)
 hfin_stages_4_5_6_summary.md
 HFIN_Implementation_Plan.md

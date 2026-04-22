@@ -46,6 +46,12 @@ class HFINNetwork(nn.Module):
         logits = self.fc(features)
         return logits
 
+    @property
+    def out_features(self) -> int:
+        """Tổng số classes hiện tại (API chung với DERNetwork)"""
+        return self.fc.out_features
+
+
     def Incremental_learning(self, new_num_classes):
         """
         Mở rộng classification head cho lớp mới

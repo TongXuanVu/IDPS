@@ -5,9 +5,10 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 from sklearn.metrics import (
-    accuracy_score, f1_score, classification_report,
+    accuracy_score, f1_score, precision_score, recall_score,
     confusion_matrix
 )
+import torch.nn.functional as F
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -37,23 +38,40 @@ def evaluate_model(model, test_dataset, classes, device, batch_size=256):
 
     all_preds = []
     all_labels = []
+    total_loss = 0.0
+    num_samples = 0
 
     for _, features, labels in test_loader:
         features = features.to(device)
+        labels = labels.to(device)
         with torch.no_grad():
             outputs = model(features)
+            # DERNetwork tra ve (logits, aux_logits) -- chi can logits chinh
+            if isinstance(outputs, tuple):
+                outputs = outputs[0]
+            loss = F.cross_entropy(outputs, labels)
+
+        total_loss += loss.item() * features.size(0)
+        num_samples += features.size(0)
+
         preds = torch.max(outputs, dim=1)[1].cpu().numpy()
         all_preds.extend(preds)
-        all_labels.extend(labels.numpy())
+        all_labels.extend(labels.cpu().numpy())
+
 
     y_true = np.array(all_labels)
     y_pred = np.array(all_preds)
+    
+    avg_loss = total_loss / max(1, num_samples)
 
     results = {
         'accuracy': accuracy_score(y_true, y_pred) * 100,
+        'precision': precision_score(y_true, y_pred, average='weighted', zero_division=0) * 100,
+        'recall': recall_score(y_true, y_pred, average='weighted', zero_division=0) * 100,
         'f1_macro': f1_score(y_true, y_pred, average='macro', zero_division=0) * 100,
         'f1_weighted': f1_score(y_true, y_pred, average='weighted', zero_division=0) * 100,
         'per_class_f1': f1_score(y_true, y_pred, average=None, zero_division=0) * 100,
+        'loss': avg_loss,
         'y_true': y_true,
         'y_pred': y_pred,
     }
@@ -96,6 +114,22 @@ def plot_accuracy_curve(rounds, accuracies, save_path, dataset_name=None):
     plt.savefig(save_path, dpi=150)
     plt.close()
 
+def plot_loss_curve(rounds, losses, save_path, dataset_name=None):
+    """
+    Vẽ loss qua các task
+    """
+    plt.figure(figsize=(10, 6))
+    
+    plt.plot(rounds, losses, 'r-o', linewidth=2, markersize=4)
+    plt.xlabel('Task')
+    plt.ylabel('Loss')
+    title = f'HFIN Loss ({dataset_name})' if dataset_name else 'HFIN Loss'
+    plt.title(title)
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(save_path, dpi=150)
+    plt.close()
+
 
 def plot_metrics_curves(x_values, metrics_dict, save_path, xlabel='Task', dataset_name=None):
     """
@@ -112,6 +146,8 @@ def plot_metrics_curves(x_values, metrics_dict, save_path, xlabel='Task', datase
     
     styles = {
         'Accuracy': 'b-',
+        'Precision': 'c-.',
+        'Recall': 'm:',
         'Macro-F1': 'g--',
         'Weighted-F1': 'r:'
     }
@@ -177,8 +213,11 @@ def print_evaluation_report(results, task_id, label_map=None, logger=None):
     msg.append(f'  ĐÁNH GIÁ - Task {task_id}')
     msg.append('='*60)
     msg.append(f'  Accuracy:     {results["accuracy"]:.2f}%')
+    msg.append(f'  Precision:    {results["precision"]:.2f}%')
+    msg.append(f'  Recall:       {results["recall"]:.2f}%')
     msg.append(f'  F1 (macro):   {results["f1_macro"]:.2f}%')
     msg.append(f'  F1 (weighted):{results["f1_weighted"]:.2f}%')
+    msg.append(f'  Loss:         {results["loss"]:.4f}')
 
     if label_map:
         inv_map = {v: k for k, v in label_map.items()}

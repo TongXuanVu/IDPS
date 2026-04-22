@@ -1,6 +1,5 @@
 """
 Feature Extractor MLP cho dữ liệu NetFlow tabular
-Thay thế ResNet18-CBAM (dùng cho ảnh) trong GLFC gốc
 """
 import torch
 import torch.nn as nn
@@ -61,8 +60,7 @@ class CNN1DFeatureExtractor(nn.Module):
 
 class LeNetTabular(nn.Module):
     """
-    Mạng nhỏ dùng cho encode_model (tương tự LeNet trong GLFC,
-    nhưng cho dữ liệu tabular thay vì ảnh)
+    Mạng nhỏ dùng cho encode_model
     """
 
     def __init__(self, input_dim=43, hidden_dim=128, num_classes=10):

@@ -108,9 +108,13 @@ def model_global_eval(model, test_dataset, task_id, task_size, num_base_classes,
         labels = labels.to(device)
         with torch.no_grad():
             outputs = model(features)
+            # DERNetwork tra ve (logits, aux_logits) -- chi can logits chinh
+            if isinstance(outputs, tuple):
+                outputs = outputs[0]
         predicts = torch.max(outputs, dim=1)[1]
         correct += (predicts == labels).sum().item()
         total += len(labels)
+
     
     accuracy = 100.0 * correct / total if total > 0 else 0.0
     model.train()

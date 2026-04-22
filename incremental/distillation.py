@@ -15,12 +15,14 @@ def get_one_hot(target, num_classes, device):
 
 
 def distillation_loss(outputs, old_outputs, targets, num_classes,
-                      old_num_classes, device, temperature=2.0, is_old_mask=None):
+                      old_num_classes, device, temperature=2.0, is_old_mask=None,
+                      weights=None):
     """
     Tính loss kết hợp theo Eq. 7 từ bài báo HFIN, tối ưu hóa Selective KD.
     """
     # 1. Classification loss (cross-entropy) áp dụng cho TOÀN BỘ batch
-    loss_ce = F.cross_entropy(outputs, targets)
+    # Thêm trọng số nếu được cung cấp để cứu các lớp hiếm
+    loss_ce = F.cross_entropy(outputs, targets, weight=weights)
 
     if old_outputs is None or old_num_classes == 0:
         return loss_ce
