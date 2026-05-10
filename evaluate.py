@@ -64,12 +64,34 @@ def evaluate_model(model, test_dataset, classes, device, batch_size=256):
     
     avg_loss = total_loss / max(1, num_samples)
 
+    # Tính Confusion Matrix để lấy FPR (False Positive Rate)
+    # Trong NIDS, FPR = (Mẫu Benign bị đoán nhầm là Attack) / (Tổng mẫu Benign)
+    # Giả định Class 0 là Benign (chuẩn CIC-IoT23)
+    cm = confusion_matrix(y_true, y_pred, labels=range(len(classes)) if isinstance(classes, (list, range)) else None)
+    fpr = 0.0
+    if cm.shape[0] > 0:
+        # TN = cm[0,0], FP = sum(cm[0, 1:])
+        tn = cm[0, 0]
+        fp = np.sum(cm[0, 1:])
+        if (fp + tn) > 0:
+            fpr = (fp / (fp + tn)) * 100
+
     results = {
         'accuracy': accuracy_score(y_true, y_pred) * 100,
-        'precision': precision_score(y_true, y_pred, average='weighted', zero_division=0) * 100,
-        'recall': recall_score(y_true, y_pred, average='weighted', zero_division=0) * 100,
+        
+        'precision_micro': precision_score(y_true, y_pred, average='micro', zero_division=0) * 100,
+        'precision_macro': precision_score(y_true, y_pred, average='macro', zero_division=0) * 100,
+        'precision_weighted': precision_score(y_true, y_pred, average='weighted', zero_division=0) * 100,
+        
+        'recall_micro': recall_score(y_true, y_pred, average='micro', zero_division=0) * 100,
+        'recall_macro': recall_score(y_true, y_pred, average='macro', zero_division=0) * 100,
+        'recall_weighted': recall_score(y_true, y_pred, average='weighted', zero_division=0) * 100,
+        
+        'f1_micro': f1_score(y_true, y_pred, average='micro', zero_division=0) * 100,
         'f1_macro': f1_score(y_true, y_pred, average='macro', zero_division=0) * 100,
         'f1_weighted': f1_score(y_true, y_pred, average='weighted', zero_division=0) * 100,
+        
+        'fpr': fpr,
         'per_class_f1': f1_score(y_true, y_pred, average=None, zero_division=0) * 100,
         'loss': avg_loss,
         'y_true': y_true,
@@ -212,12 +234,21 @@ def print_evaluation_report(results, task_id, label_map=None, logger=None):
     msg.append('\n' + '='*60)
     msg.append(f'  ĐÁNH GIÁ - Task {task_id}')
     msg.append('='*60)
-    msg.append(f'  Accuracy:     {results["accuracy"]:.2f}%')
-    msg.append(f'  Precision:    {results["precision"]:.2f}%')
-    msg.append(f'  Recall:       {results["recall"]:.2f}%')
-    msg.append(f'  F1 (macro):   {results["f1_macro"]:.2f}%')
-    msg.append(f'  F1 (weighted):{results["f1_weighted"]:.2f}%')
-    msg.append(f'  Loss:         {results["loss"]:.4f}')
+    msg.append(f'  Accuracy:           {results["accuracy"]:.2f}%')
+    
+    msg.append(f'  Precision (micro):  {results["precision_micro"]:.2f}%')
+    msg.append(f'  Precision (macro):  {results["precision_macro"]:.2f}%')
+    msg.append(f'  Precision (weight): {results["precision_weighted"]:.2f}%')
+    
+    msg.append(f'  Recall (micro):     {results["recall_micro"]:.2f}%')
+    msg.append(f'  Recall (macro):     {results["recall_macro"]:.2f}%')
+    msg.append(f'  Recall (weight):    {results["recall_weighted"]:.2f}%')
+    
+    msg.append(f'  F1 (micro):         {results["f1_micro"]:.2f}%')
+    msg.append(f'  F1 (macro):         {results["f1_macro"]:.2f}%')
+    msg.append(f'  F1 (weight):        {results["f1_weighted"]:.2f}%')
+    
+    msg.append(f'  Loss:               {results["loss"]:.4f}')
 
     if label_map:
         inv_map = {v: k for k, v in label_map.items()}

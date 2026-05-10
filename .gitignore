@@ -44,3 +44,46 @@ extract_paper.py
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Data files
+data/raw/
+data/*.zip
+data/*.pkl
+*.parquet
+*.parquet.zip
+*.pkl
+*.csv
+*.h5
+*.zip
+
+# Model checkpoints
+checkpoints/
+*.pth
+*.pt
+*.ckpt
+
+# Logs and Plots
+logs/
+plots/
+
+# Documentation and Summaries (Local only)
+*.md
+!README.md
+!experiment_summary.md
+
+# Temp / scratch / analysis scripts
+tmp_*.py
+generate_plot.py
+verify_partition.py
+Rebuild.txt
+paper_analysis.json
+extract_*.py
+read_*.py
+check_*.py
+scan_*.py
+scratch/
+__pycache__/
+*.pyc
+*.pyo
+*.txt
+

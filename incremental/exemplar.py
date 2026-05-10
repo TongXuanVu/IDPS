@@ -45,9 +45,16 @@ class ExemplarManager:
 
         # Tính feature representations
         model.eval()
+        features_list = []
+        batch_size = 8192  # Cập nhật batch_size lớn hơn để trích xuất nhanh hơn
         with torch.no_grad():
-            x = torch.FloatTensor(class_data).to(device)
-            features = model.feature_extractor(x).cpu().numpy()
+            for i in range(0, len(class_data), batch_size):
+                batch_data = class_data[i:i+batch_size]
+                batch_x = torch.FloatTensor(batch_data).to(device)
+                batch_features = model.feature_extractor(batch_x).cpu().numpy()
+                features_list.append(batch_features)
+            
+            features = np.vstack(features_list)
             features = features / (np.linalg.norm(features, axis=1, keepdims=True) + 1e-10)
 
         class_mean = np.mean(features, axis=0)
@@ -56,19 +63,19 @@ class ExemplarManager:
         exemplar = []
         exemplar_features = np.zeros((1, features.shape[1]))
         
-        selected_indices = set()
+        selected_indices = []
         for i in range(min(m, len(class_data))):
             # Tìm mẫu minimizes khoảng cách giữa running mean và class mean
             running_mean = exemplar_features / (i + 1)
             candidate_means = class_mean - (running_mean + features) / (i + 1)
             distances = np.linalg.norm(candidate_means, axis=1)
             
-            # Loại bỏ indices đã chọn
-            for idx in selected_indices:
-                distances[idx] = float('inf')
+            # Loại bỏ indices đã chọn (Vectorized operations cho tốc độ cực nhanh với mảng lớn)
+            if selected_indices:
+                distances[selected_indices] = float('inf')
             
-            best_idx = np.argmin(distances)
-            selected_indices.add(best_idx)
+            best_idx = int(np.argmin(distances))
+            selected_indices.append(best_idx)
             exemplar_features += features[best_idx:best_idx+1]
             exemplar.append(class_data[best_idx])
 

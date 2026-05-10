@@ -30,7 +30,8 @@ class EdgeServer:
                  device='cpu', memory_size=500, task_size=2,
                  method='icarl', der_alpha=0.5, der_beta=0.5,
                  max_samples_per_class=0, downsample_ratio=0.125,
-                 input_dim=41, feature_dim=64, lambda_aux=1.0):
+                 input_dim=41, feature_dim=64, lambda_aux=1.0,
+                 wto_beta=0.5):
         """
         Args:
             edge_id               : ID cua edge server
@@ -59,6 +60,7 @@ class EdgeServer:
         self.lambda_aux = lambda_aux
         self.input_dim  = input_dim
         self.feature_dim = feature_dim
+        self.wto_beta   = wto_beta
 
         # === Khoi tao Model theo method ===
         if method in ('der', 'der++'):
@@ -104,22 +106,27 @@ class EdgeServer:
                                → Cập nhật exemplar memory (chỉ iCaRL)
         """
         # ── 1. WTO: Chọn clients ──────────────────────────────────────
-        client_infos = []
-        for cid in self.client_ids:
-            client = clients_dict[cid]
-            client_infos.append({
-                'client_id': cid,
-                'class_counts': client.get_class_counts(),
-                'transmission_rate': 10.0
-            })
+        if self.wto_beta > 0:
+            client_infos = []
+            for cid in self.client_ids:
+                client = clients_dict[cid]
+                client_infos.append({
+                    'client_id': cid,
+                    'class_counts': client.get_class_counts(),
+                    'transmission_rate': 10.0
+                })
 
-        selected_client_ids = wto_select_clients_for_data(
-            client_infos, current_f1_scores, beta=0.5
-        )
-
-        if not selected_client_ids:
-            logger.info(f"Edge {self.edge_id}: WTO không chọn client nào.")
-            return self.get_weights(), 0
+            selected_client_ids = wto_select_clients_for_data(
+                client_infos, current_f1_scores, beta=self.wto_beta
+            )
+            
+            if not selected_client_ids:
+                logger.info(f"Edge {self.edge_id}: WTO không chọn client nào.")
+                return self.get_weights(), 0
+        else:
+            # WTO bị tắt, chọn tất cả clients
+            selected_client_ids = self.client_ids
+            logger.info(f"Edge {self.edge_id}: WTO is OFF, using all {len(selected_client_ids)} clients.")
 
         # ── 2. Thu thập dữ liệu từ selected clients ───────────────────
         all_data, all_labels = [], []
