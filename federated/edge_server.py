@@ -266,7 +266,7 @@ class EdgeServer:
                 num_old = len(flat_ex_x)
                 if num_old > 0 and num_new > num_old:
                     target_old = int(num_new * 0.20 / 0.80)
-                    rep = min(max(1, target_old // num_old), 50)
+                    rep = min(max(1, target_old // num_old), 500)  # Tăng trần lặp để cứu catastrophic forgetting
                     if rep > 1:
                         flat_ex_x = flat_ex_x.repeat(rep, 1)
                         flat_ex_y = flat_ex_y.repeat(rep)
@@ -353,12 +353,12 @@ class EdgeServer:
                         for i, s in enumerate(exemplar_data)
                     ])
                 )
-                # Balanced replay: target 20% of batch, cap 50x
+                # Balanced replay: target 20% of batch, cap 500x
                 num_new = len(X_train)
                 num_old = len(flat_ex_x)
                 if num_old > 0 and num_new > num_old:
                     target_old = int(num_new * 0.20 / 0.80)
-                    rep = min(max(1, target_old // num_old), 50)
+                    rep = min(max(1, target_old // num_old), 500)  # Tăng trần lặp để cứu catastrophic forgetting
                     if rep > 1:
                         logger.info(
                             f"Edge {self.edge_id}: Balanced replay "
