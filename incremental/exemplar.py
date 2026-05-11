@@ -43,6 +43,13 @@ class ExemplarManager:
             total_classes = len(self.exemplar_set) + 1
             m = self.memory_size // total_classes
 
+        # Tối ưu hóa hiệu suất cực hạn: Chọn ngẫu nhiên tập con nếu lớp quá lớn
+        # Giúp giảm thời gian tính toán từ vài giờ xuống vài giây đối với hàng triệu mẫu
+        max_samples_for_herding = max(m * 10, 50000)
+        if len(class_data) > max_samples_for_herding:
+            indices = np.random.choice(len(class_data), max_samples_for_herding, replace=False)
+            class_data = class_data[indices]
+
         # Tính feature representations
         model.eval()
         features_list = []
