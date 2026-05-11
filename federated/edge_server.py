@@ -232,7 +232,12 @@ class EdgeServer:
                 class_weights[cls] = torch.pow(raw_w, 0.5)
         
         # Đối với các lớp cũ (không có trong y_train nhưng có trong Buffer):
-        # Ta giữ trọng số mặc định là 1.0 hoặc có thể boosting nhẹ nếu cần.
+        # Tăng trọng số (boosting) để cứu vớt Recall của lớp cũ, giúp tăng Macro-F1
+        if self.task_id_old > 0:
+            for c in range(num_classes_current):
+                if c not in unique_y:
+                    class_weights[c] = 3.0  # Boost x3 cho các lớp cũ để bù đắp sự thiếu hụt số lượng mẫu
+                    
         # Ở đây ta chuẩn hóa để giá trị trung bình là 1.0
         class_weights = class_weights / class_weights.mean()
 
