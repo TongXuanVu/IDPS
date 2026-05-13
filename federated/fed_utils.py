@@ -63,6 +63,10 @@ def FedWeightedAvg(model_weights_list, weights):
         state_dict trung bình có trọng số
     """
     total_weight = sum(weights)
+    if total_weight == 0:
+        # Nếu không có mẫu nào, trả về model đầu tiên thay vì crash
+        return copy.deepcopy(model_weights_list[0])
+        
     weights_normalized = [w / total_weight for w in weights]
     
     w_avg = copy.deepcopy(model_weights_list[0])
