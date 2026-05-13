@@ -22,13 +22,13 @@ UQ_FEATURE_NAMES = [
 ]
 
 # Phân bố class theo Task cho các tập NetFlow (ToN-IoT, UQ-NIDS)
-# Kịch bản: +2 lớp mỗi Task theo đúng chuẩn bài báo
+# Cập nhật để khớp với dữ liệu thực tế trên Kaggle (5 Tasks cho NF-UQ-NIDS-v2)
 FL_TASK_CLASSES_SEQUENTIAL_NF = {
-    0: [0, 1],
-    1: [2, 3],
-    2: [4, 5],
-    3: [6, 7],
-    4: [8, 9],
+    0: [0, 1, 2, 3, 4],
+    1: [5, 6, 7, 8],
+    2: [9, 10, 11, 12],
+    3: [13, 14, 15, 16],
+    4: [17, 18, 19, 20],
 }
 
 FL_TASK_CLASSES_SEQUENTIAL_CIC = {
