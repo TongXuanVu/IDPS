@@ -164,14 +164,22 @@ def args_parser():
 
 def _fill_dataset_defaults(args):
     """Tự động điền thông số dựa trên dataset được chọn."""
-    if args.dataset in ['nf_uq_nids', 'nf_ton_iot']:
-        args.total_classes    = 11
+    if args.dataset == 'nf_uq_nids':
+        args.total_classes    = 21
+        args.num_base_classes = 5
+        args.task_size        = 4
+        args.num_features     = 39
+        args.num_clients      = 60
+        args.num_edge_servers = 3
+        if args.data_path == r'c:\FederatedLearning\FL\core\data_split':
+             args.data_path = r'D:\IDPS\HFIN\IDPS\data\raw'
+    elif args.dataset == 'nf_ton_iot':
+        args.total_classes    = 10
         args.num_base_classes = 2
         args.task_size        = 2
         args.num_features     = 39
         args.num_clients      = 60
         args.num_edge_servers = 3
-        # Cập nhật data_path mặc định cho NF datasets
         if args.data_path == r'c:\FederatedLearning\FL\core\data_split':
              args.data_path = r'D:\IDPS\HFIN\IDPS\data\raw'
     else:
