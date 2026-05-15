@@ -27,7 +27,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from config.config import args_parser
 from data.fl_dataset_loader import (
     load_fl_global_test, update_clients_for_task, 
-    FL_TASK_CLASSES_SEQUENTIAL_CIC, FL_TASK_CLASSES_SEQUENTIAL_NF,
+    FL_TASK_CLASSES_SEQUENTIAL_UQ, FL_TASK_CLASSES_SEQUENTIAL_TON,
     assign_clients_to_edges
 )
 from data.dataset import NetFlowDataset
