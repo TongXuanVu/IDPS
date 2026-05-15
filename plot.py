@@ -28,7 +28,7 @@ def plot_framework(dataset_name, metric='f1_mac', y_label='macro-F1 (%)', base_d
         print(f"Directory not found: {dataset_dir}")
         return
         
-    methods = ['replay', 'icarl', 'wa', 'der']
+    methods = ['icarl', 'wa', 'der']
     
     # Map các thư mục variant thành nhãn, kiểu đường (linestyle), marker và độ đậm nhạt của màu
     # Theo như ảnh: HFL (nhạt nhất), beta=0 (gạch gạch nhạt), beta=0.5 (đậm vừa), beta=1 (đậm nhất chấm chấm)
@@ -39,21 +39,19 @@ def plot_framework(dataset_name, metric='f1_mac', y_label='macro-F1 (%)', base_d
     ]
     
     colors = {
-        'replay': plt.cm.Blues,
         'icarl': plt.cm.Oranges,
         'wa': plt.cm.Greens,
         'der': plt.cm.Purples
     }
     
     method_names = {
-        'replay': 'Replay',
         'icarl': 'iCaRL',
         'wa': 'WA',
         'der': 'DER'
     }
     
-    # Khởi tạo 1 row, 4 columns
-    fig, axes = plt.subplots(1, 4, figsize=(18, 3.5))
+    # Khởi tạo 1 row, 3 columns
+    fig, axes = plt.subplots(1, 3, figsize=(14, 3.5))
     
     handles_dict = {}
     
