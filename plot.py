@@ -64,6 +64,15 @@ def plot_framework(dataset_name, metric='f1_mac', y_label='macro-F1 (%)', base_d
         # Nếu thư mục method chưa có, ta cứ để đồ thị trống nhưng vẫn có title/axes
         color_map = colors[method]
         
+        # Xác định xticks mặc định theo dataset
+        ds_lower = dataset_name.lower()
+        if 'uq-nids' in ds_lower or 'uq_nids' in ds_lower:
+            xticks = [5, 9, 13, 17, 21]
+        elif 'ton-iot' in ds_lower or 'ton_iot' in ds_lower:
+            xticks = [2, 4, 6, 8, 10]
+        else:
+            xticks = []
+
         if os.path.exists(method_dir):
             for variant_folder, label_suffix, linestyle, marker, color_intensity in variants:
                 csv_file = os.path.join(method_dir, variant_folder, f'metrics_{method}.csv')
@@ -76,12 +85,13 @@ def plot_framework(dataset_name, metric='f1_mac', y_label='macro-F1 (%)', base_d
                     continue
                 
                 # Tính số lượng class trên x-axis
-                if 'uq_nids' in dataset_name.lower():
-                    # UQ-NIDS: Base 5, step 4 -> 5, 9, 13, 17, 21
+                if 'uq-nids' in ds_lower or 'uq_nids' in ds_lower:
                     x_vals = 5 + df['task'] * 4
-                else:
-                    # ToN-IoT: Base 2, step 2 -> 2, 4, 6, 8...
+                elif 'ton-iot' in ds_lower or 'ton_iot' in ds_lower:
                     x_vals = 2 + df['task'] * 2
+                else:
+                    x_vals = df['task']
+                    if not xticks: xticks = df['task'].unique()
                     
                 y_vals = df[metric]
                 
@@ -98,15 +108,11 @@ def plot_framework(dataset_name, metric='f1_mac', y_label='macro-F1 (%)', base_d
                 
                 # Lưu line để làm legend chung
                 handles_dict[label] = line
-        
+                
         ax.set_xlabel('Number of Classes')
         ax.set_ylabel(y_label)
-        
-        # Định dạng x-axis cho đẹp
-        if 'uq_nids' in dataset_name.lower():
-            ax.set_xticks([5, 9, 13, 17, 21])
-        else:
-            ax.set_xticks([2, 4, 6, 8, 10])
+        if len(xticks) > 0:
+            ax.set_xticks(xticks)
             
     # Lấy handles và labels để tạo Legend chung ở trên cùng
     ordered_handles = []
