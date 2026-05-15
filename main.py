@@ -119,8 +119,11 @@ def _run_test_mode(args, logger):
     test_dataset = NetFlowDataset(X_test.numpy(), y_test.numpy())
     
     # Cấu hình schedule theo dataset
+    from data.fl_dataset_loader import FL_TASK_CLASSES_SEQUENTIAL_UQ, FL_TASK_CLASSES_SEQUENTIAL_TON, FL_TASK_CLASSES_SEQUENTIAL_CIC
     if args.dataset == 'nf_uq_nids':
         curr_schedule = FL_TASK_CLASSES_SEQUENTIAL_UQ
+    elif args.dataset == 'nf_ton_iot':
+        curr_schedule = FL_TASK_CLASSES_SEQUENTIAL_TON
     else:
         curr_schedule = FL_TASK_CLASSES_SEQUENTIAL_CIC
 
@@ -328,13 +331,20 @@ def main():
     logger.info(f'\n[1/4] Loading global test data for {args.dataset.upper()}...')
     
     # Cấu hình schedule và clients theo dataset
-    if args.dataset in ['nf_uq_nids', 'nf_ton_iot']:
-        from data.fl_dataset_loader import FL_TASK_CLASSES_SEQUENTIAL_NF
-        curr_schedule = FL_TASK_CLASSES_SEQUENTIAL_NF
+    from data.fl_dataset_loader import (
+        FL_TASK_CLASSES_SEQUENTIAL_UQ, 
+        FL_TASK_CLASSES_SEQUENTIAL_TON, 
+        FL_TASK_CLASSES_SEQUENTIAL_CIC
+    )
+    if args.dataset == 'nf_uq_nids':
+        curr_schedule = FL_TASK_CLASSES_SEQUENTIAL_UQ
         args.num_clients = 60  
         args.num_edge_servers = 3
+    elif args.dataset == 'nf_ton_iot':
+        curr_schedule = FL_TASK_CLASSES_SEQUENTIAL_TON
+        args.num_clients = 60
+        args.num_edge_servers = 3
     else:
-        from data.fl_dataset_loader import FL_TASK_CLASSES_SEQUENTIAL_CIC
         curr_schedule = FL_TASK_CLASSES_SEQUENTIAL_CIC
         args.num_clients = 10 # CIC partition has 10 clients
 

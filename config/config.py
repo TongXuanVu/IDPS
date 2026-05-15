@@ -4,6 +4,7 @@ Thong so duoc can chinh theo Muc VI.B cua bai bao.
 """
 import argparse
 import torch
+import os
 
 
 def args_parser():
@@ -172,7 +173,10 @@ def _fill_dataset_defaults(args):
         args.num_clients      = 60
         args.num_edge_servers = 3
         if args.data_path == r'c:\FederatedLearning\FL\core\data_split':
-             args.data_path = r'D:\IDPS\HFIN\IDPS\data\raw'
+             if os.path.exists('/kaggle/input'):
+                 args.data_path = '/kaggle/input/datasets/tongxuanvu/datasetidps/'
+             else:
+                 args.data_path = r'D:\IDPS\HFIN\IDPS\data\raw'
     elif args.dataset == 'nf_ton_iot':
         args.total_classes    = 10
         args.num_base_classes = 2
@@ -181,7 +185,10 @@ def _fill_dataset_defaults(args):
         args.num_clients      = 60
         args.num_edge_servers = 3
         if args.data_path == r'c:\FederatedLearning\FL\core\data_split':
-             args.data_path = r'D:\IDPS\HFIN\IDPS\data\raw'
+             if os.path.exists('/kaggle/input'):
+                 args.data_path = '/kaggle/input/datasets/tongxuanvu/datasetidps/'
+             else:
+                 args.data_path = r'D:\IDPS\HFIN\IDPS\data\raw'
     else:
         # Mặc định cho CIC-IoT23
         args.total_classes    = 34
