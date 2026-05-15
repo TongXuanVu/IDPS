@@ -1506,433 +1506,619 @@ Loading data for Task 3 (Classes: [13, 14, 15, 16])...
 2026-05-14 01:11:59,336 [INFO]   [Eval] Task 3, R 80: Acc: 51.87% | Prec-Mac: 45.78% | Rec-Mac: 62.13% | Mi-F1: 51.87% | Ma-F1: 39.85% | We-F1: 55.97% | Loss: 2.7745
 2026-05-14 01:11:59,830 [INFO]   [CKPT] Saved: ckpt_wa_task03_r080_global280_acc51.9.pth
 2026-05-14 01:11:59,830 [INFO]   [WA-Pre] Avg Norm: Old Classes = 1.7040, New Classes = 0.8559
-2026-05-14 01:11:59,830 [INFO]   [WA] Applying Weight Aligning for Task 3...
-2026-05-14 01:11:59,831 [INFO]   [WA-Post] Avg Norm: Old Classes = 1.7040, New Classes = 1.7040
-2026-05-14 01:15:41,098 [INFO] 
-============================================================
-  ĐÁNH GIÁ - Task 3
-============================================================
-  Accuracy:           35.22%
-  Precision (micro):  35.22%
-  Precision (macro):  48.11%
-  Precision (weight): 82.63%
-  Recall (micro):     35.22%
-  Recall (macro):     43.02%
-  Recall (weight):    35.22%
-  F1 (micro):         35.22%
-  F1 (macro):         25.10%
-  F1 (weight):        41.11%
-  Loss:               3.8335
 
-  Per-class F1:
-    Class 0             : 7.30%
-    Class 1             : 81.06%
-    Class 2             : 67.31%
-    Class 3             : 66.28%
-    Class 4             : 0.00%
-    Class 5             : 0.84%
-    Class 6             : 18.64%
-    Class 7             : 6.11%
-    Class 8             : 0.00%
-    Class 9             : 77.07%
-    Class 10            : 6.70%
-    Class 11            : 52.26%
-    Class 12            : 36.87%
-    Class 13            : 1.09%
-    Class 14            : 3.38%
-    Class 15            : 0.88%
-    Class 16            : 0.96%
-============================================================
-
-2026-05-14 01:15:41,098 [INFO] 
-Loading data for Task 4 (Classes: [17, 18, 19, 20])...
-2026-05-14 01:15:41,565 [INFO] Expanded global model to 21 classes for Task 4
-2026-05-14 01:15:41,578 [INFO] 
-============================================================
-2026-05-14 01:15:41,578 [INFO] Task 4/4 | Classes: [17, 18, 19, 20] | 80 rounds | LR: 0.02
-2026-05-14 01:15:41,578 [INFO] ============================================================
-2026-05-14 01:15:41,578 [INFO] 
 --- Task 4, Round 1/80 (Global 281) ---
-2026-05-14 01:17:32,233 [INFO]   [Eval] Task 4, R 1: Acc: 36.32% | Prec-Mac: 41.94% | Rec-Mac: 38.09% | Mi-F1: 36.32% | Ma-F1: 22.24% | We-F1: 41.62% | Loss: 3.9643
-2026-05-14 01:17:32,722 [INFO]   [CKPT] Saved: ckpt_wa_task04_r001_global281_acc36.3.pth
-2026-05-14 01:17:32,722 [INFO] 
+2026-05-14 01:13:18,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:13:18,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:13:18,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:13:18,101 [INFO]   [Eval] Task 4, R 1: Acc: 51.02% | Prec-Mac: 45.39% | Rec-Mac: 61.48% | Mi-F1: 51.13% | Ma-F1: 39.03% | We-F1: 55.05% | Loss: 2.7884
+2026-05-14 01:13:18,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r001_global281_acc51.0.pth
+
 --- Task 4, Round 2/80 (Global 282) ---
-2026-05-14 01:19:23,252 [INFO]   [Eval] Task 4, R 2: Acc: 37.89% | Prec-Mac: 37.10% | Rec-Mac: 35.48% | Mi-F1: 37.89% | Ma-F1: 19.82% | We-F1: 42.79% | Loss: 3.9484
-2026-05-14 01:19:23,765 [INFO]   [CKPT] Saved: ckpt_wa_task04_r002_global282_acc37.9.pth
-2026-05-14 01:19:23,765 [INFO] 
+2026-05-14 01:16:18,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:16:18,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:16:18,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:16:18,101 [INFO]   [Eval] Task 4, R 2: Acc: 51.42% | Prec-Mac: 45.55% | Rec-Mac: 61.82% | Mi-F1: 51.46% | Ma-F1: 39.16% | We-F1: 55.11% | Loss: 2.8023
+2026-05-14 01:16:18,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r002_global282_acc51.4.pth
+
 --- Task 4, Round 3/80 (Global 283) ---
-2026-05-14 01:21:14,882 [INFO]   [Eval] Task 4, R 3: Acc: 34.85% | Prec-Mac: 38.35% | Rec-Mac: 33.52% | Mi-F1: 34.85% | Ma-F1: 18.23% | We-F1: 40.57% | Loss: 3.9362
-2026-05-14 01:21:15,367 [INFO]   [CKPT] Saved: ckpt_wa_task04_r003_global283_acc34.9.pth
-2026-05-14 01:21:15,367 [INFO] 
+2026-05-14 01:19:46,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:19:46,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:19:46,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:19:46,101 [INFO]   [Eval] Task 4, R 3: Acc: 51.59% | Prec-Mac: 45.51% | Rec-Mac: 61.70% | Mi-F1: 51.22% | Ma-F1: 39.24% | We-F1: 55.13% | Loss: 2.8163
+2026-05-14 01:19:46,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r003_global283_acc51.6.pth
+
 --- Task 4, Round 4/80 (Global 284) ---
-2026-05-14 01:23:04,804 [INFO]   [Eval] Task 4, R 4: Acc: 35.43% | Prec-Mac: 36.08% | Rec-Mac: 33.98% | Mi-F1: 35.43% | Ma-F1: 18.82% | We-F1: 40.69% | Loss: 3.8947
-2026-05-14 01:23:05,287 [INFO]   [CKPT] Saved: ckpt_wa_task04_r004_global284_acc35.4.pth
-2026-05-14 01:23:05,287 [INFO] 
+2026-05-14 01:22:47,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:22:47,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:22:47,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:22:47,101 [INFO]   [Eval] Task 4, R 4: Acc: 51.41% | Prec-Mac: 45.54% | Rec-Mac: 61.87% | Mi-F1: 51.50% | Ma-F1: 39.32% | We-F1: 55.24% | Loss: 2.8304
+2026-05-14 01:22:47,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r004_global284_acc51.4.pth
+
 --- Task 4, Round 5/80 (Global 285) ---
-2026-05-14 01:24:53,890 [INFO]   [Eval] Task 4, R 5: Acc: 34.22% | Prec-Mac: 37.42% | Rec-Mac: 32.59% | Mi-F1: 34.22% | Ma-F1: 17.81% | We-F1: 39.75% | Loss: 4.0088
-2026-05-14 01:24:54,369 [INFO]   [CKPT] Saved: ckpt_wa_task04_r005_global285_acc34.2.pth
-2026-05-14 01:24:54,369 [INFO] 
+2026-05-14 01:26:34,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:26:34,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:26:34,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:26:34,101 [INFO]   [Eval] Task 4, R 5: Acc: 51.53% | Prec-Mac: 45.56% | Rec-Mac: 61.69% | Mi-F1: 51.43% | Ma-F1: 39.17% | We-F1: 55.17% | Loss: 2.8446
+2026-05-14 01:26:34,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r005_global285_acc51.5.pth
+
 --- Task 4, Round 6/80 (Global 286) ---
-2026-05-14 01:26:43,323 [INFO]   [Eval] Task 4, R 6: Acc: 34.96% | Prec-Mac: 30.65% | Rec-Mac: 33.30% | Mi-F1: 34.96% | Ma-F1: 18.50% | We-F1: 40.16% | Loss: 4.0040
-2026-05-14 01:26:43,800 [INFO]   [CKPT] Saved: ckpt_wa_task04_r006_global286_acc35.0.pth
-2026-05-14 01:26:43,801 [INFO] 
+2026-05-14 01:29:20,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:29:20,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:29:20,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:29:20,101 [INFO]   [Eval] Task 4, R 6: Acc: 51.33% | Prec-Mac: 45.48% | Rec-Mac: 61.76% | Mi-F1: 51.20% | Ma-F1: 39.11% | We-F1: 54.95% | Loss: 2.8588
+2026-05-14 01:29:20,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r006_global286_acc51.3.pth
+
 --- Task 4, Round 7/80 (Global 287) ---
-2026-05-14 01:28:32,285 [INFO]   [Eval] Task 4, R 7: Acc: 34.36% | Prec-Mac: 37.41% | Rec-Mac: 32.74% | Mi-F1: 34.36% | Ma-F1: 18.46% | We-F1: 40.06% | Loss: 3.9959
-2026-05-14 01:28:32,769 [INFO]   [CKPT] Saved: ckpt_wa_task04_r007_global287_acc34.4.pth
-2026-05-14 01:28:32,769 [INFO] 
+2026-05-14 01:31:38,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:31:38,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:31:38,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:31:38,101 [INFO]   [Eval] Task 4, R 7: Acc: 51.34% | Prec-Mac: 45.40% | Rec-Mac: 61.78% | Mi-F1: 51.32% | Ma-F1: 39.16% | We-F1: 55.10% | Loss: 2.8731
+2026-05-14 01:31:38,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r007_global287_acc51.3.pth
+
 --- Task 4, Round 8/80 (Global 288) ---
-2026-05-14 01:30:21,512 [INFO]   [Eval] Task 4, R 8: Acc: 38.80% | Prec-Mac: 33.77% | Rec-Mac: 36.05% | Mi-F1: 38.80% | Ma-F1: 21.54% | We-F1: 44.51% | Loss: 3.9182
-2026-05-14 01:30:22,003 [INFO]   [CKPT] Saved: ckpt_wa_task04_r008_global288_acc38.8.pth
-2026-05-14 01:30:22,003 [INFO] 
+2026-05-14 01:34:10,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:34:10,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:34:10,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:34:10,101 [INFO]   [Eval] Task 4, R 8: Acc: 51.41% | Prec-Mac: 45.22% | Rec-Mac: 61.61% | Mi-F1: 51.57% | Ma-F1: 39.17% | We-F1: 55.21% | Loss: 2.8875
+2026-05-14 01:34:10,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r008_global288_acc51.4.pth
+
 --- Task 4, Round 9/80 (Global 289) ---
-2026-05-14 01:32:10,672 [INFO]   [Eval] Task 4, R 9: Acc: 39.38% | Prec-Mac: 40.91% | Rec-Mac: 36.24% | Mi-F1: 39.38% | Ma-F1: 22.35% | We-F1: 45.06% | Loss: 3.8975
-2026-05-14 01:32:11,147 [INFO]   [CKPT] Saved: ckpt_wa_task04_r009_global289_acc39.4.pth
-2026-05-14 01:32:11,147 [INFO] 
+2026-05-14 01:37:26,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:37:26,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:37:26,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:37:26,101 [INFO]   [Eval] Task 4, R 9: Acc: 51.34% | Prec-Mac: 45.42% | Rec-Mac: 61.79% | Mi-F1: 51.16% | Ma-F1: 39.22% | We-F1: 54.97% | Loss: 2.9019
+2026-05-14 01:37:26,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r009_global289_acc51.3.pth
+
 --- Task 4, Round 10/80 (Global 290) ---
-2026-05-14 01:34:00,334 [INFO]   [Eval] Task 4, R 10: Acc: 39.32% | Prec-Mac: 36.14% | Rec-Mac: 36.75% | Mi-F1: 39.32% | Ma-F1: 22.52% | We-F1: 44.99% | Loss: 3.8557
-2026-05-14 01:34:00,817 [INFO]   [CKPT] Saved: ckpt_wa_task04_r010_global290_acc39.3.pth
-2026-05-14 01:34:00,817 [INFO] 
+2026-05-14 01:40:58,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:40:58,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:40:58,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:40:58,101 [INFO]   [Eval] Task 4, R 10: Acc: 51.54% | Prec-Mac: 45.55% | Rec-Mac: 61.67% | Mi-F1: 51.49% | Ma-F1: 39.15% | We-F1: 55.05% | Loss: 2.9164
+2026-05-14 01:40:58,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r010_global290_acc51.5.pth
+
 --- Task 4, Round 11/80 (Global 291) ---
-2026-05-14 01:35:49,225 [INFO]   [Eval] Task 4, R 11: Acc: 38.98% | Prec-Mac: 39.46% | Rec-Mac: 36.01% | Mi-F1: 38.98% | Ma-F1: 22.05% | We-F1: 44.80% | Loss: 3.8217
-2026-05-14 01:35:49,699 [INFO]   [CKPT] Saved: ckpt_wa_task04_r011_global291_acc39.0.pth
-2026-05-14 01:35:49,699 [INFO] 
+2026-05-14 01:44:47,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:44:47,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:44:47,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:44:47,101 [INFO]   [Eval] Task 4, R 11: Acc: 51.29% | Prec-Mac: 45.59% | Rec-Mac: 61.74% | Mi-F1: 51.31% | Ma-F1: 39.30% | We-F1: 55.03% | Loss: 2.9310
+2026-05-14 01:44:47,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r011_global291_acc51.3.pth
+
 --- Task 4, Round 12/80 (Global 292) ---
-2026-05-14 01:37:38,331 [INFO]   [Eval] Task 4, R 12: Acc: 39.23% | Prec-Mac: 39.54% | Rec-Mac: 36.89% | Mi-F1: 39.23% | Ma-F1: 22.51% | We-F1: 44.90% | Loss: 3.7962
-2026-05-14 01:37:38,987 [INFO]   [CKPT] Saved: ckpt_wa_task04_r012_global292_acc39.2.pth
-2026-05-14 01:37:38,987 [INFO] 
+2026-05-14 01:47:27,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:47:27,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:47:27,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:47:27,101 [INFO]   [Eval] Task 4, R 12: Acc: 51.42% | Prec-Mac: 45.43% | Rec-Mac: 61.81% | Mi-F1: 51.45% | Ma-F1: 39.16% | We-F1: 55.13% | Loss: 2.9456
+2026-05-14 01:47:27,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r012_global292_acc51.4.pth
+
 --- Task 4, Round 13/80 (Global 293) ---
-2026-05-14 01:39:27,753 [INFO]   [Eval] Task 4, R 13: Acc: 39.61% | Prec-Mac: 40.42% | Rec-Mac: 36.85% | Mi-F1: 39.61% | Ma-F1: 23.06% | We-F1: 45.87% | Loss: 3.7389
-2026-05-14 01:39:28,266 [INFO]   [CKPT] Saved: ckpt_wa_task04_r013_global293_acc39.6.pth
-2026-05-14 01:39:28,266 [INFO] 
+2026-05-14 01:51:23,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:51:23,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:51:23,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:51:23,101 [INFO]   [Eval] Task 4, R 13: Acc: 51.31% | Prec-Mac: 45.34% | Rec-Mac: 61.75% | Mi-F1: 51.10% | Ma-F1: 39.35% | We-F1: 54.89% | Loss: 2.9604
+2026-05-14 01:51:23,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r013_global293_acc51.3.pth
+
 --- Task 4, Round 14/80 (Global 294) ---
-2026-05-14 01:41:16,966 [INFO]   [Eval] Task 4, R 14: Acc: 39.50% | Prec-Mac: 38.95% | Rec-Mac: 37.26% | Mi-F1: 39.50% | Ma-F1: 22.44% | We-F1: 44.73% | Loss: 3.7333
-2026-05-14 01:41:17,445 [INFO]   [CKPT] Saved: ckpt_wa_task04_r014_global294_acc39.5.pth
-2026-05-14 01:41:17,445 [INFO] 
+2026-05-14 01:54:21,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:54:21,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:54:21,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:54:21,101 [INFO]   [Eval] Task 4, R 14: Acc: 51.23% | Prec-Mac: 45.39% | Rec-Mac: 61.70% | Mi-F1: 51.46% | Ma-F1: 39.23% | We-F1: 55.19% | Loss: 2.9752
+2026-05-14 01:54:21,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r014_global294_acc51.2.pth
+
 --- Task 4, Round 15/80 (Global 295) ---
-2026-05-14 01:43:05,762 [INFO]   [Eval] Task 4, R 15: Acc: 39.83% | Prec-Mac: 40.43% | Rec-Mac: 37.16% | Mi-F1: 39.83% | Ma-F1: 23.44% | We-F1: 46.09% | Loss: 3.6935
-2026-05-14 01:43:06,245 [INFO]   [CKPT] Saved: ckpt_wa_task04_r015_global295_acc39.8.pth
-2026-05-14 01:43:06,245 [INFO] 
+2026-05-14 01:57:00,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 01:57:00,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 01:57:00,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 01:57:00,101 [INFO]   [Eval] Task 4, R 15: Acc: 51.47% | Prec-Mac: 45.57% | Rec-Mac: 61.79% | Mi-F1: 51.49% | Ma-F1: 39.14% | We-F1: 54.99% | Loss: 2.9900
+2026-05-14 01:57:00,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r015_global295_acc51.5.pth
+
 --- Task 4, Round 16/80 (Global 296) ---
-2026-05-14 01:44:54,972 [INFO]   [Eval] Task 4, R 16: Acc: 39.95% | Prec-Mac: 39.87% | Rec-Mac: 37.94% | Mi-F1: 39.95% | Ma-F1: 23.45% | We-F1: 45.58% | Loss: 3.6838
-2026-05-14 01:44:55,457 [INFO]   [CKPT] Saved: ckpt_wa_task04_r016_global296_acc40.0.pth
-2026-05-14 01:44:55,457 [INFO] 
+2026-05-14 02:00:03,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:00:03,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:00:03,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:00:03,101 [INFO]   [Eval] Task 4, R 16: Acc: 51.33% | Prec-Mac: 45.38% | Rec-Mac: 61.41% | Mi-F1: 51.44% | Ma-F1: 39.21% | We-F1: 54.83% | Loss: 3.0050
+2026-05-14 02:00:03,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r016_global296_acc51.3.pth
+
 --- Task 4, Round 17/80 (Global 297) ---
-2026-05-14 01:46:44,225 [INFO]   [Eval] Task 4, R 17: Acc: 40.18% | Prec-Mac: 40.70% | Rec-Mac: 37.85% | Mi-F1: 40.18% | Ma-F1: 24.02% | We-F1: 46.60% | Loss: 3.6542
-2026-05-14 01:46:44,701 [INFO]   [CKPT] Saved: ckpt_wa_task04_r017_global297_acc40.2.pth
-2026-05-14 01:46:44,702 [INFO] 
+2026-05-14 02:04:00,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:04:00,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:04:00,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:04:00,101 [INFO]   [Eval] Task 4, R 17: Acc: 51.24% | Prec-Mac: 45.40% | Rec-Mac: 61.91% | Mi-F1: 51.33% | Ma-F1: 39.09% | We-F1: 55.07% | Loss: 3.0200
+2026-05-14 02:04:00,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r017_global297_acc51.2.pth
+
 --- Task 4, Round 18/80 (Global 298) ---
-2026-05-14 01:48:33,680 [INFO]   [Eval] Task 4, R 18: Acc: 39.89% | Prec-Mac: 39.46% | Rec-Mac: 37.86% | Mi-F1: 39.89% | Ma-F1: 23.35% | We-F1: 45.55% | Loss: 3.6695
-2026-05-14 01:48:34,157 [INFO]   [CKPT] Saved: ckpt_wa_task04_r018_global298_acc39.9.pth
-2026-05-14 01:48:34,157 [INFO] 
+2026-05-14 02:06:14,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:06:14,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:06:14,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:06:14,101 [INFO]   [Eval] Task 4, R 18: Acc: 51.16% | Prec-Mac: 45.47% | Rec-Mac: 61.68% | Mi-F1: 51.39% | Ma-F1: 39.17% | We-F1: 55.06% | Loss: 3.0351
+2026-05-14 02:06:14,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r018_global298_acc51.2.pth
+
 --- Task 4, Round 19/80 (Global 299) ---
-2026-05-14 01:50:22,875 [INFO]   [Eval] Task 4, R 19: Acc: 40.07% | Prec-Mac: 40.68% | Rec-Mac: 37.77% | Mi-F1: 40.07% | Ma-F1: 24.05% | We-F1: 46.52% | Loss: 3.6444
-2026-05-14 01:50:23,356 [INFO]   [CKPT] Saved: ckpt_wa_task04_r019_global299_acc40.1.pth
-2026-05-14 01:50:23,357 [INFO] 
+2026-05-14 02:09:09,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:09:09,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:09:09,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:09:09,101 [INFO]   [Eval] Task 4, R 19: Acc: 51.28% | Prec-Mac: 45.36% | Rec-Mac: 61.96% | Mi-F1: 51.37% | Ma-F1: 39.25% | We-F1: 55.27% | Loss: 3.0503
+2026-05-14 02:09:09,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r019_global299_acc51.3.pth
+
 --- Task 4, Round 20/80 (Global 300) ---
-2026-05-14 01:52:12,103 [INFO]   [Eval] Task 4, R 20: Acc: 39.79% | Prec-Mac: 39.64% | Rec-Mac: 37.61% | Mi-F1: 39.79% | Ma-F1: 23.25% | We-F1: 45.47% | Loss: 3.6631
-2026-05-14 01:52:12,591 [INFO]   [CKPT] Saved: ckpt_wa_task04_r020_global300_acc39.8.pth
-2026-05-14 01:52:12,591 [INFO] 
+2026-05-14 02:12:50,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:12:50,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:12:50,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:12:50,101 [INFO]   [Eval] Task 4, R 20: Acc: 51.47% | Prec-Mac: 45.40% | Rec-Mac: 61.59% | Mi-F1: 51.41% | Ma-F1: 39.23% | We-F1: 55.00% | Loss: 3.0655
+2026-05-14 02:12:50,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r020_global300_acc51.5.pth
+
 --- Task 4, Round 21/80 (Global 301) ---
-2026-05-14 01:54:03,624 [INFO]   [Eval] Task 4, R 21: Acc: 40.02% | Prec-Mac: 39.58% | Rec-Mac: 37.82% | Mi-F1: 40.02% | Ma-F1: 23.47% | We-F1: 45.85% | Loss: 3.6584
-2026-05-14 01:54:04,125 [INFO]   [CKPT] Saved: ckpt_wa_task04_r021_global301_acc40.0.pth
-2026-05-14 01:54:04,126 [INFO] 
+2026-05-14 02:15:02,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:15:02,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:15:02,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:15:02,101 [INFO]   [Eval] Task 4, R 21: Acc: 51.40% | Prec-Mac: 45.33% | Rec-Mac: 61.77% | Mi-F1: 51.26% | Ma-F1: 39.17% | We-F1: 55.18% | Loss: 3.0809
+2026-05-14 02:15:02,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r021_global301_acc51.4.pth
+
 --- Task 4, Round 22/80 (Global 302) ---
-2026-05-14 01:55:59,564 [INFO]   [Eval] Task 4, R 22: Acc: 40.10% | Prec-Mac: 39.61% | Rec-Mac: 37.96% | Mi-F1: 40.10% | Ma-F1: 23.46% | We-F1: 45.86% | Loss: 3.6617
-2026-05-14 01:56:00,053 [INFO]   [CKPT] Saved: ckpt_wa_task04_r022_global302_acc40.1.pth
-2026-05-14 01:56:00,053 [INFO] 
+2026-05-14 02:17:26,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:17:26,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:17:26,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:17:26,101 [INFO]   [Eval] Task 4, R 22: Acc: 51.27% | Prec-Mac: 45.30% | Rec-Mac: 61.77% | Mi-F1: 51.47% | Ma-F1: 39.22% | We-F1: 55.14% | Loss: 3.0963
+2026-05-14 02:17:26,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r022_global302_acc51.3.pth
+
 --- Task 4, Round 23/80 (Global 303) ---
-2026-05-14 01:57:49,686 [INFO]   [Eval] Task 4, R 23: Acc: 39.92% | Prec-Mac: 39.57% | Rec-Mac: 37.76% | Mi-F1: 39.92% | Ma-F1: 23.45% | We-F1: 45.82% | Loss: 3.6499
-2026-05-14 01:57:50,180 [INFO]   [CKPT] Saved: ckpt_wa_task04_r023_global303_acc39.9.pth
-2026-05-14 01:57:50,180 [INFO] 
+2026-05-14 02:20:51,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:20:51,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:20:51,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:20:51,101 [INFO]   [Eval] Task 4, R 23: Acc: 51.57% | Prec-Mac: 45.49% | Rec-Mac: 61.81% | Mi-F1: 51.35% | Ma-F1: 39.27% | We-F1: 55.13% | Loss: 3.1118
+2026-05-14 02:20:51,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r023_global303_acc51.6.pth
+
 --- Task 4, Round 24/80 (Global 304) ---
-2026-05-14 01:59:39,793 [INFO]   [Eval] Task 4, R 24: Acc: 40.29% | Prec-Mac: 39.41% | Rec-Mac: 38.12% | Mi-F1: 40.29% | Ma-F1: 23.51% | We-F1: 46.02% | Loss: 3.6358
-2026-05-14 01:59:40,291 [INFO]   [CKPT] Saved: ckpt_wa_task04_r024_global304_acc40.3.pth
-2026-05-14 01:59:40,291 [INFO] 
+2026-05-14 02:23:29,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:23:29,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:23:29,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:23:29,101 [INFO]   [Eval] Task 4, R 24: Acc: 51.40% | Prec-Mac: 45.62% | Rec-Mac: 61.75% | Mi-F1: 51.40% | Ma-F1: 39.17% | We-F1: 55.03% | Loss: 3.1273
+2026-05-14 02:23:29,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r024_global304_acc51.4.pth
+
 --- Task 4, Round 25/80 (Global 305) ---
-2026-05-14 02:01:29,866 [INFO]   [Eval] Task 4, R 25: Acc: 40.19% | Prec-Mac: 43.99% | Rec-Mac: 38.11% | Mi-F1: 40.19% | Ma-F1: 23.76% | We-F1: 46.22% | Loss: 3.6277
-2026-05-14 02:01:30,353 [INFO]   [CKPT] Saved: ckpt_wa_task04_r025_global305_acc40.2.pth
-2026-05-14 02:01:30,354 [INFO] 
+2026-05-14 02:26:55,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:26:55,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:26:55,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:26:55,101 [INFO]   [Eval] Task 4, R 25: Acc: 51.43% | Prec-Mac: 45.38% | Rec-Mac: 61.72% | Mi-F1: 51.49% | Ma-F1: 39.26% | We-F1: 55.08% | Loss: 3.1430
+2026-05-14 02:26:55,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r025_global305_acc51.4.pth
+
 --- Task 4, Round 26/80 (Global 306) ---
-2026-05-14 02:03:19,775 [INFO]   [Eval] Task 4, R 26: Acc: 40.57% | Prec-Mac: 39.43% | Rec-Mac: 38.32% | Mi-F1: 40.57% | Ma-F1: 23.75% | We-F1: 46.36% | Loss: 3.6119
-2026-05-14 02:03:20,253 [INFO]   [CKPT] Saved: ckpt_wa_task04_r026_global306_acc40.6.pth
-2026-05-14 02:03:20,253 [INFO] 
+2026-05-14 02:30:35,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:30:35,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:30:35,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:30:35,101 [INFO]   [Eval] Task 4, R 26: Acc: 51.39% | Prec-Mac: 45.39% | Rec-Mac: 61.89% | Mi-F1: 51.31% | Ma-F1: 39.11% | We-F1: 55.14% | Loss: 3.1587
+2026-05-14 02:30:35,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r026_global306_acc51.4.pth
+
 --- Task 4, Round 27/80 (Global 307) ---
-2026-05-14 02:05:09,870 [INFO]   [Eval] Task 4, R 27: Acc: 41.62% | Prec-Mac: 44.38% | Rec-Mac: 42.89% | Mi-F1: 41.62% | Ma-F1: 28.65% | We-F1: 47.69% | Loss: 3.5877
-2026-05-14 02:05:10,354 [INFO]   [CKPT] Saved: ckpt_wa_task04_r027_global307_acc41.6.pth
-2026-05-14 02:05:10,355 [INFO] 
+2026-05-14 02:33:55,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:33:55,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:33:55,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:33:55,101 [INFO]   [Eval] Task 4, R 27: Acc: 51.30% | Prec-Mac: 45.50% | Rec-Mac: 61.91% | Mi-F1: 51.20% | Ma-F1: 39.19% | We-F1: 55.09% | Loss: 3.1745
+2026-05-14 02:33:55,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r027_global307_acc51.3.pth
+
 --- Task 4, Round 28/80 (Global 308) ---
-2026-05-14 02:06:59,645 [INFO]   [Eval] Task 4, R 28: Acc: 41.99% | Prec-Mac: 44.50% | Rec-Mac: 43.41% | Mi-F1: 41.99% | Ma-F1: 28.99% | We-F1: 47.91% | Loss: 3.5485
-2026-05-14 02:07:00,133 [INFO]   [CKPT] Saved: ckpt_wa_task04_r028_global308_acc42.0.pth
-2026-05-14 02:07:00,133 [INFO] 
+2026-05-14 02:37:26,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:37:26,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:37:26,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:37:26,101 [INFO]   [Eval] Task 4, R 28: Acc: 51.50% | Prec-Mac: 45.51% | Rec-Mac: 61.72% | Mi-F1: 51.43% | Ma-F1: 39.05% | We-F1: 55.19% | Loss: 3.1903
+2026-05-14 02:37:26,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r028_global308_acc51.5.pth
+
 --- Task 4, Round 29/80 (Global 309) ---
-2026-05-14 02:08:49,261 [INFO]   [Eval] Task 4, R 29: Acc: 42.07% | Prec-Mac: 43.90% | Rec-Mac: 43.56% | Mi-F1: 42.07% | Ma-F1: 29.03% | We-F1: 48.05% | Loss: 3.5352
-2026-05-14 02:08:49,743 [INFO]   [CKPT] Saved: ckpt_wa_task04_r029_global309_acc42.1.pth
-2026-05-14 02:08:49,743 [INFO] 
+2026-05-14 02:40:05,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:40:05,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:40:05,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:40:05,101 [INFO]   [Eval] Task 4, R 29: Acc: 51.23% | Prec-Mac: 45.32% | Rec-Mac: 61.78% | Mi-F1: 51.48% | Ma-F1: 39.14% | We-F1: 54.93% | Loss: 3.2063
+2026-05-14 02:40:05,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r029_global309_acc51.2.pth
+
 --- Task 4, Round 30/80 (Global 310) ---
-2026-05-14 02:10:40,144 [INFO]   [Eval] Task 4, R 30: Acc: 42.48% | Prec-Mac: 44.47% | Rec-Mac: 43.98% | Mi-F1: 42.48% | Ma-F1: 29.56% | We-F1: 48.34% | Loss: 3.5220
-2026-05-14 02:10:40,867 [INFO]   [CKPT] Saved: ckpt_wa_task04_r030_global310_acc42.5.pth
-2026-05-14 02:10:40,867 [INFO] 
+2026-05-14 02:42:58,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:42:58,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:42:58,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:42:58,101 [INFO]   [Eval] Task 4, R 30: Acc: 51.17% | Prec-Mac: 45.33% | Rec-Mac: 61.51% | Mi-F1: 51.56% | Ma-F1: 39.29% | We-F1: 54.96% | Loss: 3.2223
+2026-05-14 02:42:58,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r030_global310_acc51.2.pth
+
 --- Task 4, Round 31/80 (Global 311) ---
-2026-05-14 02:12:32,808 [INFO]   [Eval] Task 4, R 31: Acc: 41.90% | Prec-Mac: 43.78% | Rec-Mac: 43.53% | Mi-F1: 41.90% | Ma-F1: 28.97% | We-F1: 47.88% | Loss: 3.5421
-2026-05-14 02:12:33,301 [INFO]   [CKPT] Saved: ckpt_wa_task04_r031_global311_acc41.9.pth
-2026-05-14 02:12:33,301 [INFO] 
+2026-05-14 02:46:41,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:46:41,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:46:41,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:46:41,101 [INFO]   [Eval] Task 4, R 31: Acc: 51.36% | Prec-Mac: 45.47% | Rec-Mac: 62.01% | Mi-F1: 51.39% | Ma-F1: 39.12% | We-F1: 55.00% | Loss: 3.2384
+2026-05-14 02:46:41,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r031_global311_acc51.4.pth
+
 --- Task 4, Round 32/80 (Global 312) ---
-2026-05-14 02:14:24,114 [INFO]   [Eval] Task 4, R 32: Acc: 42.02% | Prec-Mac: 43.91% | Rec-Mac: 43.33% | Mi-F1: 42.02% | Ma-F1: 28.61% | We-F1: 47.85% | Loss: 3.5587
-2026-05-14 02:14:24,608 [INFO]   [CKPT] Saved: ckpt_wa_task04_r032_global312_acc42.0.pth
-2026-05-14 02:14:24,608 [INFO] 
+2026-05-14 02:49:47,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:49:47,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:49:47,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:49:47,101 [INFO]   [Eval] Task 4, R 32: Acc: 51.51% | Prec-Mac: 45.59% | Rec-Mac: 61.77% | Mi-F1: 51.44% | Ma-F1: 39.09% | We-F1: 55.11% | Loss: 3.2546
+2026-05-14 02:49:47,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r032_global312_acc51.5.pth
+
 --- Task 4, Round 33/80 (Global 313) ---
-2026-05-14 02:16:14,819 [INFO]   [Eval] Task 4, R 33: Acc: 41.94% | Prec-Mac: 43.76% | Rec-Mac: 43.43% | Mi-F1: 41.94% | Ma-F1: 28.66% | We-F1: 47.79% | Loss: 3.5592
-2026-05-14 02:16:15,321 [INFO]   [CKPT] Saved: ckpt_wa_task04_r033_global313_acc41.9.pth
-2026-05-14 02:16:15,322 [INFO] 
+2026-05-14 02:52:50,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:52:50,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:52:50,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:52:50,101 [INFO]   [Eval] Task 4, R 33: Acc: 51.31% | Prec-Mac: 45.48% | Rec-Mac: 61.64% | Mi-F1: 51.37% | Ma-F1: 39.17% | We-F1: 54.92% | Loss: 3.2709
+2026-05-14 02:52:50,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r033_global313_acc51.3.pth
+
 --- Task 4, Round 34/80 (Global 314) ---
-2026-05-14 02:18:05,372 [INFO]   [Eval] Task 4, R 34: Acc: 41.73% | Prec-Mac: 43.73% | Rec-Mac: 43.17% | Mi-F1: 41.73% | Ma-F1: 28.45% | We-F1: 47.63% | Loss: 3.5631
-2026-05-14 02:18:05,859 [INFO]   [CKPT] Saved: ckpt_wa_task04_r034_global314_acc41.7.pth
-2026-05-14 02:18:05,859 [INFO] 
+2026-05-14 02:56:39,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 02:56:39,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 02:56:39,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 02:56:39,101 [INFO]   [Eval] Task 4, R 34: Acc: 51.29% | Prec-Mac: 45.43% | Rec-Mac: 61.62% | Mi-F1: 51.38% | Ma-F1: 39.25% | We-F1: 55.10% | Loss: 3.2872
+2026-05-14 02:56:39,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r034_global314_acc51.3.pth
+
 --- Task 4, Round 35/80 (Global 315) ---
-2026-05-14 02:19:58,103 [INFO]   [Eval] Task 4, R 35: Acc: 41.73% | Prec-Mac: 43.79% | Rec-Mac: 43.28% | Mi-F1: 41.73% | Ma-F1: 28.49% | We-F1: 47.62% | Loss: 3.5664
-2026-05-14 02:19:58,618 [INFO]   [CKPT] Saved: ckpt_wa_task04_r035_global315_acc41.7.pth
-2026-05-14 02:19:58,618 [INFO] 
+2026-05-14 03:00:21,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:00:21,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:00:21,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:00:21,101 [INFO]   [Eval] Task 4, R 35: Acc: 51.41% | Prec-Mac: 45.42% | Rec-Mac: 61.55% | Mi-F1: 51.06% | Ma-F1: 39.12% | We-F1: 54.84% | Loss: 3.3037
+2026-05-14 03:00:21,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r035_global315_acc51.4.pth
+
 --- Task 4, Round 36/80 (Global 316) ---
-2026-05-14 02:22:13,412 [INFO]   [Eval] Task 4, R 36: Acc: 41.40% | Prec-Mac: 43.79% | Rec-Mac: 42.99% | Mi-F1: 41.40% | Ma-F1: 28.38% | We-F1: 47.40% | Loss: 3.5763
-2026-05-14 02:22:14,039 [INFO]   [CKPT] Saved: ckpt_wa_task04_r036_global316_acc41.4.pth
-2026-05-14 02:22:14,040 [INFO] 
+2026-05-14 03:02:37,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:02:37,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:02:37,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:02:37,101 [INFO]   [Eval] Task 4, R 36: Acc: 51.44% | Prec-Mac: 45.45% | Rec-Mac: 61.87% | Mi-F1: 51.43% | Ma-F1: 39.02% | We-F1: 54.90% | Loss: 3.3202
+2026-05-14 03:02:37,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r036_global316_acc51.4.pth
+
 --- Task 4, Round 37/80 (Global 317) ---
-2026-05-14 02:24:13,659 [INFO]   [Eval] Task 4, R 37: Acc: 41.19% | Prec-Mac: 43.52% | Rec-Mac: 42.71% | Mi-F1: 41.19% | Ma-F1: 27.92% | We-F1: 47.06% | Loss: 3.6022
-2026-05-14 02:24:14,211 [INFO]   [CKPT] Saved: ckpt_wa_task04_r037_global317_acc41.2.pth
-2026-05-14 02:24:14,211 [INFO] 
+2026-05-14 03:05:30,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:05:30,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:05:30,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:05:30,101 [INFO]   [Eval] Task 4, R 37: Acc: 51.34% | Prec-Mac: 45.42% | Rec-Mac: 61.83% | Mi-F1: 51.28% | Ma-F1: 39.13% | We-F1: 54.95% | Loss: 3.3368
+2026-05-14 03:05:30,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r037_global317_acc51.3.pth
+
 --- Task 4, Round 38/80 (Global 318) ---
-2026-05-14 02:26:12,188 [INFO]   [Eval] Task 4, R 38: Acc: 41.00% | Prec-Mac: 43.47% | Rec-Mac: 42.58% | Mi-F1: 41.00% | Ma-F1: 27.96% | We-F1: 47.02% | Loss: 3.5904
-2026-05-14 02:26:12,729 [INFO]   [CKPT] Saved: ckpt_wa_task04_r038_global318_acc41.0.pth
-2026-05-14 02:26:12,729 [INFO] 
+2026-05-14 03:08:59,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:08:59,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:08:59,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:08:59,101 [INFO]   [Eval] Task 4, R 38: Acc: 51.45% | Prec-Mac: 45.51% | Rec-Mac: 61.76% | Mi-F1: 51.52% | Ma-F1: 39.17% | We-F1: 54.97% | Loss: 3.3535
+2026-05-14 03:08:59,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r038_global318_acc51.4.pth
+
 --- Task 4, Round 39/80 (Global 319) ---
-2026-05-14 02:28:09,555 [INFO]   [Eval] Task 4, R 39: Acc: 41.39% | Prec-Mac: 43.48% | Rec-Mac: 42.95% | Mi-F1: 41.39% | Ma-F1: 28.09% | We-F1: 47.27% | Loss: 3.5891
-2026-05-14 02:28:10,088 [INFO]   [CKPT] Saved: ckpt_wa_task04_r039_global319_acc41.4.pth
-2026-05-14 02:28:10,088 [INFO] 
+2026-05-14 03:11:53,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:11:53,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:11:53,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:11:53,101 [INFO]   [Eval] Task 4, R 39: Acc: 51.30% | Prec-Mac: 45.50% | Rec-Mac: 61.83% | Mi-F1: 51.39% | Ma-F1: 39.28% | We-F1: 55.03% | Loss: 3.3703
+2026-05-14 03:11:53,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r039_global319_acc51.3.pth
+
 --- Task 4, Round 40/80 (Global 320) ---
-2026-05-14 02:30:05,246 [INFO]   [Eval] Task 4, R 40: Acc: 39.99% | Prec-Mac: 43.17% | Rec-Mac: 38.30% | Mi-F1: 39.99% | Ma-F1: 23.46% | We-F1: 45.95% | Loss: 3.6161
-2026-05-14 02:30:05,750 [INFO]   [CKPT] Saved: ckpt_wa_task04_r040_global320_acc40.0.pth
-2026-05-14 02:30:05,750 [INFO] 
+2026-05-14 03:15:41,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:15:41,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:15:41,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:15:41,101 [INFO]   [Eval] Task 4, R 40: Acc: 51.48% | Prec-Mac: 45.55% | Rec-Mac: 61.98% | Mi-F1: 51.25% | Ma-F1: 39.31% | We-F1: 54.92% | Loss: 3.3871
+2026-05-14 03:15:41,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r040_global320_acc51.5.pth
+
 --- Task 4, Round 41/80 (Global 321) ---
-2026-05-14 02:30:05,750 [INFO]    [LR DECAY] Round 40 reached milestone: New LR = 0.002
-2026-05-14 02:31:59,088 [INFO]   [Eval] Task 4, R 41: Acc: 42.66% | Prec-Mac: 43.13% | Rec-Mac: 44.82% | Mi-F1: 42.66% | Ma-F1: 29.77% | We-F1: 48.78% | Loss: 3.4630
-2026-05-14 02:31:59,616 [INFO]   [CKPT] Saved: ckpt_wa_task04_r041_global321_acc42.7.pth
-2026-05-14 02:31:59,616 [INFO] 
+2026-05-14 03:19:15,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:19:15,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:19:15,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:19:15,101 [INFO]   [Eval] Task 4, R 41: Acc: 51.36% | Prec-Mac: 45.48% | Rec-Mac: 61.84% | Mi-F1: 51.28% | Ma-F1: 39.23% | We-F1: 55.12% | Loss: 3.4040
+2026-05-14 03:19:15,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r041_global321_acc51.4.pth
+
 --- Task 4, Round 42/80 (Global 322) ---
-2026-05-14 02:33:52,681 [INFO]   [Eval] Task 4, R 42: Acc: 42.46% | Prec-Mac: 43.28% | Rec-Mac: 44.57% | Mi-F1: 42.46% | Ma-F1: 29.54% | We-F1: 48.52% | Loss: 3.4766
-2026-05-14 02:33:53,171 [INFO]   [CKPT] Saved: ckpt_wa_task04_r042_global322_acc42.5.pth
-2026-05-14 02:33:53,172 [INFO] 
+2026-05-14 03:22:55,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:22:55,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:22:55,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:22:55,101 [INFO]   [Eval] Task 4, R 42: Acc: 51.25% | Prec-Mac: 45.61% | Rec-Mac: 61.72% | Mi-F1: 51.57% | Ma-F1: 39.23% | We-F1: 55.19% | Loss: 3.4211
+2026-05-14 03:22:55,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r042_global322_acc51.2.pth
+
 --- Task 4, Round 43/80 (Global 323) ---
-2026-05-14 02:35:47,883 [INFO]   [Eval] Task 4, R 43: Acc: 42.49% | Prec-Mac: 43.26% | Rec-Mac: 44.58% | Mi-F1: 42.49% | Ma-F1: 29.53% | We-F1: 48.57% | Loss: 3.4756
-2026-05-14 02:35:48,405 [INFO]   [CKPT] Saved: ckpt_wa_task04_r043_global323_acc42.5.pth
-2026-05-14 02:35:48,405 [INFO] 
+2026-05-14 03:25:45,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:25:45,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:25:45,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:25:45,101 [INFO]   [Eval] Task 4, R 43: Acc: 51.39% | Prec-Mac: 45.47% | Rec-Mac: 61.80% | Mi-F1: 51.32% | Ma-F1: 39.30% | We-F1: 55.27% | Loss: 3.4382
+2026-05-14 03:25:45,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r043_global323_acc51.4.pth
+
 --- Task 4, Round 44/80 (Global 324) ---
-2026-05-14 02:37:41,460 [INFO]   [Eval] Task 4, R 44: Acc: 42.41% | Prec-Mac: 43.25% | Rec-Mac: 44.54% | Mi-F1: 42.41% | Ma-F1: 29.48% | We-F1: 48.47% | Loss: 3.4751
-2026-05-14 02:37:41,955 [INFO]   [CKPT] Saved: ckpt_wa_task04_r044_global324_acc42.4.pth
-2026-05-14 02:37:41,955 [INFO] 
+2026-05-14 03:28:34,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:28:34,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:28:34,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:28:34,101 [INFO]   [Eval] Task 4, R 44: Acc: 51.41% | Prec-Mac: 45.47% | Rec-Mac: 61.95% | Mi-F1: 51.35% | Ma-F1: 39.19% | We-F1: 55.02% | Loss: 3.4554
+2026-05-14 03:28:34,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r044_global324_acc51.4.pth
+
 --- Task 4, Round 45/80 (Global 325) ---
-2026-05-14 02:39:34,938 [INFO]   [Eval] Task 4, R 45: Acc: 42.51% | Prec-Mac: 43.25% | Rec-Mac: 44.60% | Mi-F1: 42.51% | Ma-F1: 29.54% | We-F1: 48.58% | Loss: 3.4757
-2026-05-14 02:39:35,435 [INFO]   [CKPT] Saved: ckpt_wa_task04_r045_global325_acc42.5.pth
-2026-05-14 02:39:35,436 [INFO] 
+2026-05-14 03:31:35,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:31:35,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:31:35,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:31:35,101 [INFO]   [Eval] Task 4, R 45: Acc: 51.42% | Prec-Mac: 45.52% | Rec-Mac: 61.72% | Mi-F1: 51.62% | Ma-F1: 39.19% | We-F1: 55.23% | Loss: 3.4726
+2026-05-14 03:31:35,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r045_global325_acc51.4.pth
+
 --- Task 4, Round 46/80 (Global 326) ---
-2026-05-14 02:41:28,349 [INFO]   [Eval] Task 4, R 46: Acc: 42.51% | Prec-Mac: 43.25% | Rec-Mac: 44.60% | Mi-F1: 42.51% | Ma-F1: 29.54% | We-F1: 48.58% | Loss: 3.4754
-2026-05-14 02:41:28,856 [INFO]   [CKPT] Saved: ckpt_wa_task04_r046_global326_acc42.5.pth
-2026-05-14 02:41:28,856 [INFO] 
+2026-05-14 03:35:20,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:35:20,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:35:20,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:35:20,101 [INFO]   [Eval] Task 4, R 46: Acc: 51.42% | Prec-Mac: 45.38% | Rec-Mac: 61.87% | Mi-F1: 51.38% | Ma-F1: 39.14% | We-F1: 55.12% | Loss: 3.4900
+2026-05-14 03:35:20,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r046_global326_acc51.4.pth
+
 --- Task 4, Round 47/80 (Global 327) ---
-2026-05-14 02:43:22,191 [INFO]   [Eval] Task 4, R 47: Acc: 42.49% | Prec-Mac: 43.24% | Rec-Mac: 44.57% | Mi-F1: 42.49% | Ma-F1: 29.51% | We-F1: 48.56% | Loss: 3.4744
-2026-05-14 02:43:22,695 [INFO]   [CKPT] Saved: ckpt_wa_task04_r047_global327_acc42.5.pth
-2026-05-14 02:43:22,695 [INFO] 
+2026-05-14 03:37:37,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:37:37,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:37:37,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:37:37,101 [INFO]   [Eval] Task 4, R 47: Acc: 51.21% | Prec-Mac: 45.41% | Rec-Mac: 61.71% | Mi-F1: 51.51% | Ma-F1: 39.18% | We-F1: 54.99% | Loss: 3.5074
+2026-05-14 03:37:37,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r047_global327_acc51.2.pth
+
 --- Task 4, Round 48/80 (Global 328) ---
-2026-05-14 02:45:15,890 [INFO]   [Eval] Task 4, R 48: Acc: 42.46% | Prec-Mac: 43.19% | Rec-Mac: 44.55% | Mi-F1: 42.46% | Ma-F1: 29.45% | We-F1: 48.51% | Loss: 3.4743
-2026-05-14 02:45:16,563 [INFO]   [CKPT] Saved: ckpt_wa_task04_r048_global328_acc42.5.pth
-2026-05-14 02:45:16,563 [INFO] 
+2026-05-14 03:41:26,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:41:26,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:41:26,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:41:26,101 [INFO]   [Eval] Task 4, R 48: Acc: 51.46% | Prec-Mac: 45.43% | Rec-Mac: 61.79% | Mi-F1: 51.28% | Ma-F1: 39.27% | We-F1: 54.92% | Loss: 3.5250
+2026-05-14 03:41:26,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r048_global328_acc51.5.pth
+
 --- Task 4, Round 49/80 (Global 329) ---
-2026-05-14 02:47:07,303 [INFO]   [Eval] Task 4, R 49: Acc: 42.50% | Prec-Mac: 43.23% | Rec-Mac: 44.57% | Mi-F1: 42.50% | Ma-F1: 29.50% | We-F1: 48.55% | Loss: 3.4724
-2026-05-14 02:47:07,821 [INFO]   [CKPT] Saved: ckpt_wa_task04_r049_global329_acc42.5.pth
-2026-05-14 02:47:07,821 [INFO] 
+2026-05-14 03:44:19,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:44:19,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:44:19,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:44:19,101 [INFO]   [Eval] Task 4, R 49: Acc: 51.40% | Prec-Mac: 45.38% | Rec-Mac: 61.80% | Mi-F1: 51.42% | Ma-F1: 39.20% | We-F1: 55.15% | Loss: 3.5426
+2026-05-14 03:44:19,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r049_global329_acc51.4.pth
+
 --- Task 4, Round 50/80 (Global 330) ---
-2026-05-14 02:48:57,622 [INFO]   [Eval] Task 4, R 50: Acc: 42.29% | Prec-Mac: 43.15% | Rec-Mac: 44.47% | Mi-F1: 42.29% | Ma-F1: 29.35% | We-F1: 48.31% | Loss: 3.4751
-2026-05-14 02:48:58,143 [INFO]   [CKPT] Saved: ckpt_wa_task04_r050_global330_acc42.3.pth
-2026-05-14 02:48:58,143 [INFO] 
+2026-05-14 03:47:46,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:47:46,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:47:46,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:47:46,101 [INFO]   [Eval] Task 4, R 50: Acc: 51.51% | Prec-Mac: 45.41% | Rec-Mac: 61.59% | Mi-F1: 51.31% | Ma-F1: 39.16% | We-F1: 54.98% | Loss: 3.5603
+2026-05-14 03:47:46,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r050_global330_acc51.5.pth
+
 --- Task 4, Round 51/80 (Global 331) ---
-2026-05-14 02:50:47,658 [INFO]   [Eval] Task 4, R 51: Acc: 42.41% | Prec-Mac: 43.18% | Rec-Mac: 44.54% | Mi-F1: 42.41% | Ma-F1: 29.43% | We-F1: 48.46% | Loss: 3.4740
-2026-05-14 02:50:48,170 [INFO]   [CKPT] Saved: ckpt_wa_task04_r051_global331_acc42.4.pth
-2026-05-14 02:50:48,170 [INFO] 
+2026-05-14 03:51:21,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:51:21,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:51:21,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:51:21,101 [INFO]   [Eval] Task 4, R 51: Acc: 51.37% | Prec-Mac: 45.48% | Rec-Mac: 61.76% | Mi-F1: 51.24% | Ma-F1: 39.32% | We-F1: 54.97% | Loss: 3.5781
+2026-05-14 03:51:21,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r051_global331_acc51.4.pth
+
 --- Task 4, Round 52/80 (Global 332) ---
-2026-05-14 02:52:37,182 [INFO]   [Eval] Task 4, R 52: Acc: 42.44% | Prec-Mac: 44.17% | Rec-Mac: 44.57% | Mi-F1: 42.44% | Ma-F1: 29.51% | We-F1: 48.48% | Loss: 3.4755
-2026-05-14 02:52:37,655 [INFO]   [CKPT] Saved: ckpt_wa_task04_r052_global332_acc42.4.pth
-2026-05-14 02:52:37,655 [INFO] 
+2026-05-14 03:54:19,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:54:19,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:54:19,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:54:19,101 [INFO]   [Eval] Task 4, R 52: Acc: 51.37% | Prec-Mac: 45.45% | Rec-Mac: 61.92% | Mi-F1: 51.51% | Ma-F1: 39.07% | We-F1: 55.25% | Loss: 3.5960
+2026-05-14 03:54:19,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r052_global332_acc51.4.pth
+
 --- Task 4, Round 53/80 (Global 333) ---
-2026-05-14 02:54:27,102 [INFO]   [Eval] Task 4, R 53: Acc: 42.43% | Prec-Mac: 44.28% | Rec-Mac: 44.75% | Mi-F1: 42.43% | Ma-F1: 29.81% | We-F1: 48.46% | Loss: 3.4764
-2026-05-14 02:54:27,603 [INFO]   [CKPT] Saved: ckpt_wa_task04_r053_global333_acc42.4.pth
-2026-05-14 02:54:27,603 [INFO] 
+2026-05-14 03:58:00,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 03:58:00,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 03:58:00,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 03:58:00,101 [INFO]   [Eval] Task 4, R 53: Acc: 51.42% | Prec-Mac: 45.58% | Rec-Mac: 61.85% | Mi-F1: 51.31% | Ma-F1: 39.07% | We-F1: 55.08% | Loss: 3.6140
+2026-05-14 03:58:00,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r053_global333_acc51.4.pth
+
 --- Task 4, Round 54/80 (Global 334) ---
-2026-05-14 02:56:17,018 [INFO]   [Eval] Task 4, R 54: Acc: 42.50% | Prec-Mac: 44.21% | Rec-Mac: 45.10% | Mi-F1: 42.50% | Ma-F1: 30.21% | We-F1: 48.55% | Loss: 3.4755
-2026-05-14 02:56:17,493 [INFO]   [CKPT] Saved: ckpt_wa_task04_r054_global334_acc42.5.pth
-2026-05-14 02:56:17,493 [INFO] 
+2026-05-14 04:00:43,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:00:43,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:00:43,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:00:43,101 [INFO]   [Eval] Task 4, R 54: Acc: 51.33% | Prec-Mac: 45.56% | Rec-Mac: 61.79% | Mi-F1: 51.29% | Ma-F1: 39.25% | We-F1: 55.15% | Loss: 3.6321
+2026-05-14 04:00:43,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r054_global334_acc51.3.pth
+
 --- Task 4, Round 55/80 (Global 335) ---
-2026-05-14 02:58:06,947 [INFO]   [Eval] Task 4, R 55: Acc: 42.49% | Prec-Mac: 44.12% | Rec-Mac: 45.35% | Mi-F1: 42.49% | Ma-F1: 30.35% | We-F1: 48.52% | Loss: 3.4761
-2026-05-14 02:58:07,467 [INFO]   [CKPT] Saved: ckpt_wa_task04_r055_global335_acc42.5.pth
-2026-05-14 02:58:07,467 [INFO] 
+2026-05-14 04:04:14,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:04:14,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:04:14,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:04:14,101 [INFO]   [Eval] Task 4, R 55: Acc: 51.35% | Prec-Mac: 45.43% | Rec-Mac: 61.79% | Mi-F1: 51.35% | Ma-F1: 39.15% | We-F1: 54.97% | Loss: 3.6502
+2026-05-14 04:04:14,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r055_global335_acc51.3.pth
+
 --- Task 4, Round 56/80 (Global 336) ---
-2026-05-14 02:59:56,478 [INFO]   [Eval] Task 4, R 56: Acc: 42.42% | Prec-Mac: 44.15% | Rec-Mac: 45.34% | Mi-F1: 42.42% | Ma-F1: 30.36% | We-F1: 48.46% | Loss: 3.4761
-2026-05-14 02:59:56,954 [INFO]   [CKPT] Saved: ckpt_wa_task04_r056_global336_acc42.4.pth
-2026-05-14 02:59:56,955 [INFO] 
+2026-05-14 04:06:56,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:06:56,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:06:56,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:06:56,101 [INFO]   [Eval] Task 4, R 56: Acc: 51.34% | Prec-Mac: 45.54% | Rec-Mac: 61.78% | Mi-F1: 51.47% | Ma-F1: 39.14% | We-F1: 55.13% | Loss: 3.6685
+2026-05-14 04:06:56,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r056_global336_acc51.3.pth
+
 --- Task 4, Round 57/80 (Global 337) ---
-2026-05-14 03:01:46,075 [INFO]   [Eval] Task 4, R 57: Acc: 42.53% | Prec-Mac: 44.19% | Rec-Mac: 45.51% | Mi-F1: 42.53% | Ma-F1: 30.50% | We-F1: 48.58% | Loss: 3.4763
-2026-05-14 03:01:46,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r057_global337_acc42.5.pth
-2026-05-14 03:01:46,555 [INFO] 
+2026-05-14 04:10:12,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:10:12,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:10:12,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:10:12,101 [INFO]   [Eval] Task 4, R 57: Acc: 51.34% | Prec-Mac: 45.51% | Rec-Mac: 61.99% | Mi-F1: 51.16% | Ma-F1: 39.26% | We-F1: 55.32% | Loss: 3.6868
+2026-05-14 04:10:12,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r057_global337_acc51.3.pth
+
 --- Task 4, Round 58/80 (Global 338) ---
+2026-05-14 04:13:15,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:13:15,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:13:15,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:13:15,101 [INFO]   [Eval] Task 4, R 58: Acc: 51.14% | Prec-Mac: 45.39% | Rec-Mac: 61.59% | Mi-F1: 51.44% | Ma-F1: 39.26% | We-F1: 55.11% | Loss: 3.7053
+2026-05-14 04:13:15,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r058_global338_acc51.1.pth
 
 --- Task 4, Round 59/80 (Global 339) ---
-2026-05-14 03:03:51,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:03:51,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:03:51,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:03:51,555 [INFO]   [Eval] Task 4, R 59: Acc: 42.39% | Prec-Mac: 43.88% | Rec-Mac: 44.95% | Mi-F1: 42.61% | Ma-F1: 29.88% | We-F1: 48.43% | Loss: 3.5286
-2026-05-14 03:03:51,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r059_global339_acc42.4.pth
+2026-05-14 04:15:43,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:15:43,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:15:43,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:15:43,101 [INFO]   [Eval] Task 4, R 59: Acc: 51.23% | Prec-Mac: 45.57% | Rec-Mac: 61.67% | Mi-F1: 51.26% | Ma-F1: 39.20% | We-F1: 55.14% | Loss: 3.7238
+2026-05-14 04:15:43,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r059_global339_acc51.2.pth
 
 --- Task 4, Round 60/80 (Global 340) ---
-2026-05-14 03:06:17,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:06:17,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:06:17,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:06:17,555 [INFO]   [Eval] Task 4, R 60: Acc: 42.58% | Prec-Mac: 43.93% | Rec-Mac: 45.00% | Mi-F1: 42.37% | Ma-F1: 29.81% | We-F1: 48.34% | Loss: 3.5463
-2026-05-14 03:06:17,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r060_global340_acc42.6.pth
+2026-05-14 04:19:00,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:19:00,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:19:00,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:19:00,101 [INFO]   [Eval] Task 4, R 60: Acc: 51.20% | Prec-Mac: 45.42% | Rec-Mac: 61.60% | Mi-F1: 51.38% | Ma-F1: 39.30% | We-F1: 54.96% | Loss: 3.7424
+2026-05-14 04:19:00,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r060_global340_acc51.2.pth
 
 --- Task 4, Round 61/80 (Global 341) ---
-2026-05-14 03:09:34,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:09:34,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:09:34,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:09:34,555 [INFO]   [Eval] Task 4, R 61: Acc: 42.51% | Prec-Mac: 43.94% | Rec-Mac: 44.91% | Mi-F1: 42.30% | Ma-F1: 29.91% | We-F1: 48.69% | Loss: 3.5640
-2026-05-14 03:09:34,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r061_global341_acc42.5.pth
+2026-05-14 04:22:10,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:22:10,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:22:10,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:22:10,101 [INFO]   [Eval] Task 4, R 61: Acc: 51.33% | Prec-Mac: 45.31% | Rec-Mac: 61.67% | Mi-F1: 51.36% | Ma-F1: 39.27% | We-F1: 55.29% | Loss: 3.7611
+2026-05-14 04:22:10,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r061_global341_acc51.3.pth
 
 --- Task 4, Round 62/80 (Global 342) ---
-2026-05-14 03:12:50,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:12:50,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:12:50,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:12:50,555 [INFO]   [Eval] Task 4, R 62: Acc: 42.34% | Prec-Mac: 43.83% | Rec-Mac: 44.84% | Mi-F1: 42.40% | Ma-F1: 29.99% | We-F1: 48.52% | Loss: 3.5818
-2026-05-14 03:12:50,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r062_global342_acc42.3.pth
+2026-05-14 04:25:26,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:25:26,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:25:26,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:25:26,101 [INFO]   [Eval] Task 4, R 62: Acc: 51.43% | Prec-Mac: 45.42% | Rec-Mac: 61.74% | Mi-F1: 51.49% | Ma-F1: 39.33% | We-F1: 54.95% | Loss: 3.7799
+2026-05-14 04:25:26,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r062_global342_acc51.4.pth
 
 --- Task 4, Round 63/80 (Global 343) ---
-2026-05-14 03:16:04,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:16:04,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:16:04,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:16:04,555 [INFO]   [Eval] Task 4, R 63: Acc: 42.69% | Prec-Mac: 43.84% | Rec-Mac: 44.88% | Mi-F1: 42.60% | Ma-F1: 29.91% | We-F1: 48.54% | Loss: 3.5997
-2026-05-14 03:16:04,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r063_global343_acc42.7.pth
+2026-05-14 04:28:44,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:28:44,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:28:44,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:28:44,101 [INFO]   [Eval] Task 4, R 63: Acc: 51.42% | Prec-Mac: 45.39% | Rec-Mac: 61.76% | Mi-F1: 51.29% | Ma-F1: 39.30% | We-F1: 55.12% | Loss: 3.7988
+2026-05-14 04:28:44,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r063_global343_acc51.4.pth
 
 --- Task 4, Round 64/80 (Global 344) ---
-2026-05-14 03:18:12,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:18:12,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:18:12,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:18:12,555 [INFO]   [Eval] Task 4, R 64: Acc: 42.44% | Prec-Mac: 43.73% | Rec-Mac: 45.02% | Mi-F1: 42.60% | Ma-F1: 29.95% | We-F1: 48.56% | Loss: 3.6177
-2026-05-14 03:18:12,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r064_global344_acc42.4.pth
+2026-05-14 04:31:40,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:31:40,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:31:40,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:31:40,101 [INFO]   [Eval] Task 4, R 64: Acc: 51.26% | Prec-Mac: 45.39% | Rec-Mac: 61.68% | Mi-F1: 51.20% | Ma-F1: 39.17% | We-F1: 54.96% | Loss: 3.8178
+2026-05-14 04:31:40,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r064_global344_acc51.3.pth
 
 --- Task 4, Round 65/80 (Global 345) ---
-2026-05-14 03:20:34,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:20:34,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:20:34,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:20:34,555 [INFO]   [Eval] Task 4, R 65: Acc: 42.52% | Prec-Mac: 43.85% | Rec-Mac: 44.84% | Mi-F1: 42.55% | Ma-F1: 29.85% | We-F1: 48.46% | Loss: 3.6358
-2026-05-14 03:20:34,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r065_global345_acc42.5.pth
+2026-05-14 04:33:59,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:33:59,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:33:59,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:33:59,101 [INFO]   [Eval] Task 4, R 65: Acc: 51.18% | Prec-Mac: 45.48% | Rec-Mac: 61.83% | Mi-F1: 51.46% | Ma-F1: 39.21% | We-F1: 54.97% | Loss: 3.8369
+2026-05-14 04:33:59,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r065_global345_acc51.2.pth
 
 --- Task 4, Round 66/80 (Global 346) ---
-2026-05-14 03:23:22,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:23:22,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:23:22,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:23:22,555 [INFO]   [Eval] Task 4, R 66: Acc: 42.42% | Prec-Mac: 43.85% | Rec-Mac: 44.97% | Mi-F1: 42.57% | Ma-F1: 29.87% | We-F1: 48.39% | Loss: 3.6540
-2026-05-14 03:23:22,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r066_global346_acc42.4.pth
+2026-05-14 04:37:44,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:37:44,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:37:44,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:37:44,101 [INFO]   [Eval] Task 4, R 66: Acc: 51.31% | Prec-Mac: 45.47% | Rec-Mac: 61.72% | Mi-F1: 51.47% | Ma-F1: 39.28% | We-F1: 55.02% | Loss: 3.8561
+2026-05-14 04:37:44,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r066_global346_acc51.3.pth
 
 --- Task 4, Round 67/80 (Global 347) ---
-2026-05-14 03:26:46,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:26:46,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:26:46,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:26:46,555 [INFO]   [Eval] Task 4, R 67: Acc: 42.31% | Prec-Mac: 43.76% | Rec-Mac: 44.89% | Mi-F1: 42.50% | Ma-F1: 29.96% | We-F1: 48.55% | Loss: 3.6723
-2026-05-14 03:26:46,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r067_global347_acc42.3.pth
+2026-05-14 04:41:11,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:41:11,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:41:11,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:41:11,101 [INFO]   [Eval] Task 4, R 67: Acc: 51.43% | Prec-Mac: 45.57% | Rec-Mac: 61.67% | Mi-F1: 51.24% | Ma-F1: 39.15% | We-F1: 55.12% | Loss: 3.8754
+2026-05-14 04:41:11,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r067_global347_acc51.4.pth
 
 --- Task 4, Round 68/80 (Global 348) ---
-2026-05-14 03:30:10,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:30:10,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:30:10,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:30:10,555 [INFO]   [Eval] Task 4, R 68: Acc: 42.49% | Prec-Mac: 43.79% | Rec-Mac: 45.00% | Mi-F1: 42.51% | Ma-F1: 29.88% | We-F1: 48.45% | Loss: 3.6906
-2026-05-14 03:30:10,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r068_global348_acc42.5.pth
+2026-05-14 04:43:38,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:43:38,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:43:38,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:43:38,101 [INFO]   [Eval] Task 4, R 68: Acc: 51.24% | Prec-Mac: 45.37% | Rec-Mac: 61.86% | Mi-F1: 51.28% | Ma-F1: 39.23% | We-F1: 55.14% | Loss: 3.8947
+2026-05-14 04:43:38,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r068_global348_acc51.2.pth
 
 --- Task 4, Round 69/80 (Global 349) ---
-2026-05-14 03:33:42,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:33:42,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:33:42,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:33:42,555 [INFO]   [Eval] Task 4, R 69: Acc: 42.55% | Prec-Mac: 43.98% | Rec-Mac: 44.97% | Mi-F1: 42.41% | Ma-F1: 29.78% | We-F1: 48.54% | Loss: 3.7091
-2026-05-14 03:33:42,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r069_global349_acc42.6.pth
+2026-05-14 04:45:38,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:45:38,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:45:38,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:45:38,101 [INFO]   [Eval] Task 4, R 69: Acc: 51.38% | Prec-Mac: 45.42% | Rec-Mac: 61.88% | Mi-F1: 51.29% | Ma-F1: 39.29% | We-F1: 55.13% | Loss: 3.9142
+2026-05-14 04:45:38,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r069_global349_acc51.4.pth
 
 --- Task 4, Round 70/80 (Global 350) ---
-2026-05-14 03:37:27,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:37:27,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:37:27,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:37:27,555 [INFO]   [Eval] Task 4, R 70: Acc: 42.40% | Prec-Mac: 43.71% | Rec-Mac: 44.87% | Mi-F1: 42.35% | Ma-F1: 29.87% | We-F1: 48.43% | Loss: 3.7276
-2026-05-14 03:37:27,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r070_global350_acc42.4.pth
+2026-05-14 04:48:45,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:48:45,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:48:45,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:48:45,101 [INFO]   [Eval] Task 4, R 70: Acc: 51.13% | Prec-Mac: 45.44% | Rec-Mac: 61.78% | Mi-F1: 51.39% | Ma-F1: 39.06% | We-F1: 54.95% | Loss: 3.9338
+2026-05-14 04:48:45,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r070_global350_acc51.1.pth
 
 --- Task 4, Round 71/80 (Global 351) ---
-2026-05-14 03:40:17,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:40:17,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:40:17,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:40:17,555 [INFO]   [Eval] Task 4, R 71: Acc: 42.46% | Prec-Mac: 43.72% | Rec-Mac: 44.92% | Mi-F1: 42.45% | Ma-F1: 29.90% | We-F1: 48.55% | Loss: 3.7463
-2026-05-14 03:40:17,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r071_global351_acc42.5.pth
+2026-05-14 04:52:08,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:52:08,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:52:08,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:52:08,101 [INFO]   [Eval] Task 4, R 71: Acc: 51.38% | Prec-Mac: 45.41% | Rec-Mac: 61.72% | Mi-F1: 51.17% | Ma-F1: 39.23% | We-F1: 54.94% | Loss: 3.9535
+2026-05-14 04:52:08,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r071_global351_acc51.4.pth
 
 --- Task 4, Round 72/80 (Global 352) ---
-2026-05-14 03:44:14,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:44:14,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:44:14,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:44:14,555 [INFO]   [Eval] Task 4, R 72: Acc: 42.52% | Prec-Mac: 43.80% | Rec-Mac: 44.95% | Mi-F1: 42.50% | Ma-F1: 29.85% | We-F1: 48.42% | Loss: 3.7650
-2026-05-14 03:44:14,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r072_global352_acc42.5.pth
+2026-05-14 04:55:25,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:55:25,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:55:25,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:55:25,101 [INFO]   [Eval] Task 4, R 72: Acc: 51.41% | Prec-Mac: 45.39% | Rec-Mac: 61.63% | Mi-F1: 51.18% | Ma-F1: 39.24% | We-F1: 55.25% | Loss: 3.9732
+2026-05-14 04:55:25,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r072_global352_acc51.4.pth
 
 --- Task 4, Round 73/80 (Global 353) ---
-2026-05-14 03:47:01,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:47:01,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:47:01,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:47:01,555 [INFO]   [Eval] Task 4, R 73: Acc: 42.43% | Prec-Mac: 43.87% | Rec-Mac: 44.85% | Mi-F1: 42.53% | Ma-F1: 29.85% | We-F1: 48.53% | Loss: 3.7838
-2026-05-14 03:47:01,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r073_global353_acc42.4.pth
+2026-05-14 04:58:00,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 04:58:00,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 04:58:00,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 04:58:00,101 [INFO]   [Eval] Task 4, R 73: Acc: 51.41% | Prec-Mac: 45.57% | Rec-Mac: 61.82% | Mi-F1: 51.57% | Ma-F1: 39.25% | We-F1: 55.05% | Loss: 3.9931
+2026-05-14 04:58:00,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r073_global353_acc51.4.pth
 
 --- Task 4, Round 74/80 (Global 354) ---
-2026-05-14 03:50:49,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:50:49,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:50:49,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:50:49,555 [INFO]   [Eval] Task 4, R 74: Acc: 42.53% | Prec-Mac: 43.98% | Rec-Mac: 44.95% | Mi-F1: 42.39% | Ma-F1: 29.87% | We-F1: 48.60% | Loss: 3.8028
-2026-05-14 03:50:49,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r074_global354_acc42.5.pth
+2026-05-14 05:00:23,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 05:00:23,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 05:00:23,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 05:00:23,101 [INFO]   [Eval] Task 4, R 74: Acc: 51.31% | Prec-Mac: 45.55% | Rec-Mac: 61.89% | Mi-F1: 51.11% | Ma-F1: 39.27% | We-F1: 55.18% | Loss: 4.0131
+2026-05-14 05:00:23,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r074_global354_acc51.3.pth
 
 --- Task 4, Round 75/80 (Global 355) ---
-2026-05-14 03:53:39,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:53:39,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:53:39,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:53:39,555 [INFO]   [Eval] Task 4, R 75: Acc: 42.60% | Prec-Mac: 43.66% | Rec-Mac: 44.97% | Mi-F1: 42.32% | Ma-F1: 29.93% | We-F1: 48.57% | Loss: 3.8218
-2026-05-14 03:53:39,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r075_global355_acc42.6.pth
+2026-05-14 05:02:53,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 05:02:53,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 05:02:53,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 05:02:53,101 [INFO]   [Eval] Task 4, R 75: Acc: 51.35% | Prec-Mac: 45.32% | Rec-Mac: 61.74% | Mi-F1: 51.48% | Ma-F1: 39.18% | We-F1: 55.01% | Loss: 4.0331
+2026-05-14 05:02:53,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r075_global355_acc51.3.pth
 
 --- Task 4, Round 76/80 (Global 356) ---
-2026-05-14 03:56:40,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:56:40,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:56:40,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:56:40,555 [INFO]   [Eval] Task 4, R 76: Acc: 42.55% | Prec-Mac: 43.76% | Rec-Mac: 44.93% | Mi-F1: 42.52% | Ma-F1: 29.86% | We-F1: 48.68% | Loss: 3.8409
-2026-05-14 03:56:40,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r076_global356_acc42.5.pth
+2026-05-14 05:05:58,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 05:05:58,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 05:05:58,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 05:05:58,101 [INFO]   [Eval] Task 4, R 76: Acc: 51.52% | Prec-Mac: 45.47% | Rec-Mac: 61.77% | Mi-F1: 51.30% | Ma-F1: 39.13% | We-F1: 55.04% | Loss: 4.0533
+2026-05-14 05:05:58,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r076_global356_acc51.5.pth
 
 --- Task 4, Round 77/80 (Global 357) ---
-2026-05-14 03:59:32,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 03:59:32,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 03:59:32,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 03:59:32,555 [INFO]   [Eval] Task 4, R 77: Acc: 42.55% | Prec-Mac: 43.73% | Rec-Mac: 44.85% | Mi-F1: 42.51% | Ma-F1: 29.91% | We-F1: 48.64% | Loss: 3.8601
-2026-05-14 03:59:32,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r077_global357_acc42.6.pth
+2026-05-14 05:09:02,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 05:09:02,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 05:09:02,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 05:09:02,101 [INFO]   [Eval] Task 4, R 77: Acc: 51.52% | Prec-Mac: 45.51% | Rec-Mac: 61.87% | Mi-F1: 51.21% | Ma-F1: 39.11% | We-F1: 54.90% | Loss: 4.0735
+2026-05-14 05:09:02,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r077_global357_acc51.5.pth
 
 --- Task 4, Round 78/80 (Global 358) ---
-2026-05-14 04:02:06,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 04:02:06,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 04:02:06,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 04:02:06,555 [INFO]   [Eval] Task 4, R 78: Acc: 42.52% | Prec-Mac: 43.93% | Rec-Mac: 44.81% | Mi-F1: 42.42% | Ma-F1: 29.94% | We-F1: 48.54% | Loss: 3.8794
-2026-05-14 04:02:06,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r078_global358_acc42.5.pth
+2026-05-14 05:11:42,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 05:11:42,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 05:11:42,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 05:11:42,101 [INFO]   [Eval] Task 4, R 78: Acc: 51.37% | Prec-Mac: 45.46% | Rec-Mac: 61.84% | Mi-F1: 51.27% | Ma-F1: 39.18% | We-F1: 55.02% | Loss: 4.0939
+2026-05-14 05:11:42,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r078_global358_acc51.4.pth
 
 --- Task 4, Round 79/80 (Global 359) ---
-2026-05-14 04:05:03,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 04:05:03,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 04:05:03,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 04:05:03,555 [INFO]   [Eval] Task 4, R 79: Acc: 42.48% | Prec-Mac: 43.85% | Rec-Mac: 44.99% | Mi-F1: 42.26% | Ma-F1: 30.02% | We-F1: 48.43% | Loss: 3.8988
-2026-05-14 04:05:03,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r079_global359_acc42.5.pth
+2026-05-14 05:15:32,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 05:15:32,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 05:15:32,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 05:15:32,101 [INFO]   [Eval] Task 4, R 79: Acc: 51.40% | Prec-Mac: 45.38% | Rec-Mac: 61.88% | Mi-F1: 51.36% | Ma-F1: 39.17% | We-F1: 55.09% | Loss: 4.1144
+2026-05-14 05:15:32,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r079_global359_acc51.4.pth
 
 --- Task 4, Round 80/80 (Global 360) ---
-2026-05-14 04:07:08,555 [INFO] Edge 0: [DER] Task 4 training round done.
-2026-05-14 04:07:08,555 [INFO] Edge 1: [DER] Task 4 training round done.
-2026-05-14 04:07:08,555 [INFO] Edge 2: [DER] Task 4 training round done.
-2026-05-14 04:07:08,555 [INFO]   [Eval] Task 4, R 80: Acc: 42.34% | Prec-Mac: 43.79% | Rec-Mac: 45.01% | Mi-F1: 42.48% | Ma-F1: 29.81% | We-F1: 48.59% | Loss: 3.9183
-2026-05-14 04:07:08,555 [INFO]   [CKPT] Saved: ckpt_wa_task04_r080_global360_acc42.3.pth
+2026-05-14 05:17:43,101 [INFO] Edge 0: [DER] Task 4 training round done.
+2026-05-14 05:17:43,101 [INFO] Edge 1: [DER] Task 4 training round done.
+2026-05-14 05:17:43,101 [INFO] Edge 2: [DER] Task 4 training round done.
+2026-05-14 05:17:43,101 [INFO]   [Eval] Task 4, R 80: Acc: 51.28% | Prec-Mac: 45.27% | Rec-Mac: 61.77% | Mi-F1: 51.29% | Ma-F1: 39.28% | We-F1: 55.13% | Loss: 4.1350
+2026-05-14 05:17:43,101 [INFO]   [CKPT] Saved: ckpt_wa_task04_r080_global360_acc51.3.pth
+
+2026-05-14 05:22:43,101 [INFO] 
+============================================================
+2026-05-14 05:22:43,101 [INFO]   KẾT QUẢ CUỐI CÙNG
+2026-05-14 05:22:43,101 [INFO]   Final Accuracy:      51.28%
+2026-05-14 05:22:43,101 [INFO]   Final Macro-F1:      39.28%
+2026-05-14 05:22:43,101 [INFO]   Final Weighted-F1:   55.13%
+2026-05-14 05:22:43,101 [INFO]   Avg Forgetting:      11.08%
+============================================================
+
+2026-05-14 05:22:43,101 [INFO] 
+============================================================
+2026-05-14 05:22:43,101 [INFO] TRAINING COMPLETED!
+============================================================
+
+2026-05-14 05:22:43,101 [INFO] 
+============================================================
+  ĐÁNH GIÁ - Task FINAL
+============================================================
+  Accuracy:           51.28%
+  Precision (micro):  51.48%
+  Precision (macro):  45.27%
+  Precision (weight): 78.74%
+  Recall (micro):     51.32%
+  Recall (macro):     61.77%
+  Recall (weight):    51.23%
+  F1 (micro):         51.29%
+  F1 (macro):         39.28%
+  F1 (weight):        55.13%
+  Loss:               4.1350
+
+  Per-class F1:
+    Class 0             : 47.55%
+    Class 1             : 40.34%
+    Class 2             : 40.89%
+    Class 3             : 38.19%
+    Class 4             : 41.55%
+    Class 5             : 39.71%
+    Class 6             : 35.15%
+    Class 7             : 38.12%
+    Class 8             : 40.29%
+    Class 9             : 35.22%
+    Class 10            : 32.64%
+    Class 11            : 35.83%
+    Class 12            : 33.86%
+    Class 13            : 31.17%
+    Class 14            : 32.63%
+    Class 15            : 29.51%
+    Class 16            : 31.47%
+    Class 17            : 31.31%
+    Class 18            : 31.63%
+    Class 19            : 27.57%
+    Class 20            : 24.89%
+============================================================
+
+2026-05-14 05:22:43,101 [INFO] Đã lưu tiến độ huấn luyện vào CSV: ./logs/metrics_der.csv
