@@ -1,63 +1,67 @@
 # HFIN: Hierarchical Federated Class-Incremental Learning for NIDS
 
-HFIN (Hierarchical Federated Class-Incremental Learning) là một framework học sâu được thiết kế để giải quyết các thách thức của Hệ thống Phát hiện Xâm nhập Mạng (NIDS) trong môi trường IIoT (Industrial Internet of Things). 
+HFIN (Hierarchical Federated Class-Incremental Learning) là một framework học máy phân tán được thiết kế chuyên biệt cho Hệ thống Phát hiện Xâm nhập Mạng (NIDS) trong môi trường Industrial IoT (IIoT). 
 
-HFIN kết hợp **Federated Learning (Học liên bang)** để huấn luyện mô hình cộng tác bảo mật dữ liệu và **Class-Incremental Learning (Học tăng cường lớp)** để thích ứng với các loại tấn công mới theo thời gian mà không gây hiện tượng "quên lãng thảm họa" (catastrophic forgetting).
-
----
-
-## 🏛️ Kiến trúc Hệ thống (3-Tier)
-
-Hệ thống được chia thành 3 lớp phân cấp theo bài báo nghiên cứu:
-
-1.  **Cloud Server**: Tổng hợp các mô hình từ Edge Servers bằng phương pháp **FedWeightedAvg** (Eq. 14) và duy trì Global Model. Thực hiện **Weight Aligning (Eq. 9)** để cân bằng trọng số giữa các lớp cũ và mới.
-2.  **Edge Server**: Đóng vai trò là trung tâm huấn luyện cục bộ (Local Trainer).
-    *   **WTO (Weighted Transmission Optimization)**: Chọn lọc Clients quan trọng nhất để truyền dữ liệu thô (Raw Data) nhằm tối ưu băng thông.
-    *   **FCIL Training**: Huấn luyện dựa trên tập dữ liệu gộp từ Clients kết hợp với **Exemplar Memory (500 mẫu)**.
-    *   **KD Loss (Eq. 11, 12)**: Sử dụng Softmax-Distillation để duy trì tri thức cũ.
-3.  **Client (IIoT Device)**: Các thiết bị có tài nguyên cực yếu. Chỉ chịu trách nhiệm thu thập lưu lượng mạng và gửi dữ liệu thô lên Edge Server khi được chọn qua WTO.
-
-```mermaid
-graph TD
-    Cloud[Cloud Server: Global Aggregation & Weight Aligning]
-    Edge1[Edge Server 1: WTO & FCIL Training]
-    Edge2[Edge Server 2: WTO & FCIL Training]
-    C1[Client 1-20]
-    C2[Client 21-40]
-    
-    Cloud <-->|Model Weights| Edge1
-    Cloud <-->|Model Weights| Edge2
-    Edge1 -.->|WTO Selection| C1
-    Edge2 -.->|WTO Selection| C2
-    C1 == Data ==> Edge1
-    C2 == Data ==> Edge2
-```
+Framework này giải quyết đồng thời hai thách thức lớn: **Bảo mật dữ liệu** (thông qua Federated Learning) và **Thích ứng liên tục** (thông qua Class-Incremental Learning) mà không gây ra hiện tượng quên lãng thảm họa.
 
 ---
 
-## 🚀 Các Tính năng Cốt lõi
-*   **Hierarchical FL**: Kiến trúc 3 lớp Cloud-Edge-Client khớp 100% với thực tế IIoT.
-*   **WTO (Eq. 8)**: Tối ưu hóa truyền dẫn dựa trên độ quan trọng của lớp và tốc độ truyền dẫn thực thế (Shannon-Hartley).
-*   **Adaptive KD Loss (Eq. 7)**: Kết hợp $\mathcal{L}_{CE} + \mathcal{L}_{KD}$ với hệ số Lambdas tự thích ứng theo tỉ lệ lớp mới/cũ.
-*   **Herding Memory**: Quản lý bộ nhớ mẫu thông minh tại Edge (m=500).
-*   **Weight Aligning (WA)**: Chuẩn hóa classification head sau mỗi task để tránh thiên kiến lớp mới.
+## 🏛️ Kiến trúc Phân cấp (3-Tier)
+
+Hệ thống được thiết kế theo mô hình 3 lớp khớp với thực tế hạ tầng mạng công nghiệp:
+
+1.  **Cloud Server**: Tổng hợp mô hình Global, thực hiện **Weight Aligning (WA)** để cân bằng trọng số giữa các lớp cũ và mới, giảm thiểu thiên kiến (bias) sau mỗi giai đoạn tăng trưởng.
+2.  **Edge Server**: Trung tâm huấn luyện và quản lý bộ nhớ.
+    *   **WTO (Weighted Transmission Optimization)**: Tối ưu hóa băng thông bằng cách chọn lọc các Client quan trọng nhất để truyền dữ liệu dựa trên độ hiếm của lớp và trạng thái kênh truyền.
+    *   **FCIL Training**: Huấn luyện tăng cường kết hợp **Replay Buffer (Herding)** và **Knowledge Distillation (KD)** để duy trì tri thức cũ.
+3.  **Client (IIoT Device)**: Thu thập lưu lượng mạng (NetFlow) và gửi dữ liệu lên Edge khi được chọn qua cơ chế WTO.
 
 ---
 
 ## 📂 Cấu trúc Dự án
-*   `federated/`: Chứa logic `cloud_server.py`, `edge_server.py`, và `client.py`.
-*   `incremental/`: Triển khai WTO, Distillation Loss và quản lý bộ nhớ mẫu (Exemplar).
-*   `models/`: Kiến trúc **1-D CNN** và Adaptive Classification Head.
-*   `data/`: Scripts tiền xử lý và phân chia dữ liệu Non-IID (Dirichlet).
-*   `main.py`: Điểm bắt đầu của chu trình huấn luyện toàn diện.
-*   `evaluate.py`: Đánh giá chi tiết (Macro-F1, Confusion Matrix, Forgetting Metric).
+
+*   `main.py`: Script chính để khởi chạy chu trình huấn luyện Federated Class-Incremental.
+*   `plot.py`: Công cụ trực quan hóa kết quả thực nghiệm (Accuracy, F1-Score) từ các file log CSV.
+*   `evaluate.py`: Đánh giá chi tiết model sau huấn luyện.
+*   `data/`: Chứa bộ nạp dữ liệu (`fl_dataset_loader.py`) và logic phân chia Non-IID.
+*   `models/`: Kiến trúc 1-D CNN và các biến thể mạng cho Incremental Learning (DER, iCaRL, WA).
+*   `federated/`: Logic điều phối Cloud - Edge - Client.
+*   `incremental/`: Triển khai các thuật toán cốt lõi (WTO, Loss functions, Memory management).
+*   `logs/`: Lưu trữ kết quả thực nghiệm (CSV) và các biểu đồ đầu ra (.png).
 
 ---
 
-## 🛠️ Cài đặt nhanh
-Xem chi tiết tại [GETTING_STARTED.md](./GETTING_STARTED.md).
+## 🛠️ Hướng dẫn Sử dụng
 
+### 1. Cài đặt Môi trường
 ```bash
 pip install -r requirements.txt
-python main.py --dataset inf_ton_iot --epochs_global 80
 ```
+
+### 2. Huấn luyện Mô hình
+Sử dụng tham số `--dataset` để chọn bộ dữ liệu (`nf_uq_nids` hoặc `nf_ton_iot`):
+
+```bash
+# Huấn luyện trên bộ NF-UQ-NIDS-v2 (21 lớp, 5 Task)
+python main.py --dataset nf_uq_nids --method der --wto_type WTO
+
+# Huấn luyện trên bộ NF-ToN-IoT-v2 (10 lớp, 5 Task)
+python main.py --dataset nf_ton_iot --method der --wto_type WTO
+```
+
+### 3. Trực quan hóa Kết quả
+Sau khi huấn luyện, các file log sẽ được lưu trong thư mục `logs/`. Sử dụng `plot.py` để vẽ biểu đồ so sánh:
+
+```bash
+python plot.py
+```
+Biểu đồ sẽ được lưu trực tiếp vào thư mục log của từng dataset tương ứng (ví dụ: `logs/NF-UQ-NIDS-v2_acc_plot.png`).
+
+---
+
+## 📊 Bộ dữ liệu Hỗ trợ
+*   **NF-UQ-NIDS-v2**: 21 loại nhãn, được chia thành 5 Task (Lớp cơ sở + 4 Task tăng trưởng).
+*   **NF-ToN-IoT-v2**: 10 loại nhãn, được chia thành 5 Task (Mỗi task 2 lớp).
+
+---
+*Dự án được phát triển bởi TongXuanVu.*
