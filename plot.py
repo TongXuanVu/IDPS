@@ -21,7 +21,7 @@ def get_last_round_metrics(csv_path):
     last_rounds = df.groupby('task').last().reset_index()
     return last_rounds
 
-def plot_framework(dataset_name, metric='f1_mac', y_label='macro-F1 (%)', base_dir=r'D:\IDPS\HFIN\IDPS\logs'):
+def plot_framework(dataset_name, metric='f1_mac', y_label='macro-F1 (%)', base_dir=r'D:\IDPS\logs'):
     """Vẽ biểu đồ so sánh các phương pháp giống như ảnh tham khảo."""
     dataset_dir = os.path.join(base_dir, dataset_name)
     if not os.path.exists(dataset_dir):
