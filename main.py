@@ -625,7 +625,8 @@ def main():
                     epochs=args.epochs_local,
                     lr=current_lr,
                     batch_size=args.batch_size,
-                    is_last_round=is_last_round_of_task
+                    is_last_round=is_last_round_of_task,
+                    round_in_task=round_in_task
                 )
                 if weights:
                     edge_weights.append(weights)

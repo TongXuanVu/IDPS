@@ -109,6 +109,10 @@ class DERNetwork(nn.Module):
             old_in  = self.fc.in_features
             new_fc.weight.data[:old_out, :old_in] = self.fc.weight.data.clone()
             new_fc.bias.data[:old_out]             = self.fc.bias.data.clone()
+            
+            # Zero-initialize các trọng số chéo để tránh nhiễu ban đầu
+            new_fc.weight.data[:old_out, old_in:] = 0.0
+            new_fc.weight.data[old_out:, :old_in] = 0.0
         self.fc = new_fc
 
         # --- 3. Tạo aux_fc mới cho task này ---

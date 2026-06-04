@@ -57,7 +57,7 @@ class EdgeServer:
         self.der_beta  = der_beta
         self.max_samples_per_class = max_samples_per_class
         self.downsample_ratio = downsample_ratio
-        self.lambda_aux = lambda_aux
+        self.lambda_aux = 0.1  # CHANGED: Giảm từ 1.0 xuống 0.1 để tránh over-penalize backbone mới
         self.input_dim  = input_dim
         self.feature_dim = feature_dim
         self.wto_beta   = wto_beta
@@ -89,7 +89,7 @@ class EdgeServer:
     # ------------------------------------------------------------------
     def train_local(self, clients_dict, global_round, task_id,
                     task_classes, current_f1_scores,
-                    epochs=5, lr=0.01, batch_size=32, is_last_round=False):
+                    epochs=5, lr=0.01, batch_size=32, is_last_round=False, round_in_task=0):
         """
         Huấn luyện cục bộ tại Edge Server.
 
@@ -194,13 +194,12 @@ class EdgeServer:
             old_num_classes = self.model.fc.out_features - len(task_classes)
             self.learned_classes = list(range(old_num_classes))
 
-            if self.method in ('icarl', 'wa'):
-                # iCaRL / WA: lưu bản copy old model để KD
+            if self.method in ('icarl', 'wa', 'der', 'der++'):
+                # Bật lưu old_model cho CẢ DER để dùng Distillation Loss
                 self.old_model = copy.deepcopy(self.model)
                 self.old_model.eval()
-            # DER: không cần old model (logits đã lưu trong buffer)
 
-        if self.method in ('icarl', 'wa') and self.old_model is not None:
+        if self.method in ('icarl', 'wa', 'der', 'der++') and self.old_model is not None:
             self.old_model.eval()
 
         # Kiểm tra label hợp lệ
@@ -212,93 +211,100 @@ class EdgeServer:
                     f"model out_features {self.model.fc.out_features}."
                 )
 
-        # ── 5. Class weights (chống imbalance) ─────────────────────────
+        # ── 4b. Ghép dữ liệu Exemplar (Replay) TRƯỚC KHI tính trọng số ──
+        is_old = [False] * num_new_samples
+        if self.method in ('icarl', 'wa', 'der', 'der++') and task_id > 0:
+            exemplar_data, exemplar_labels = self.exemplar_manager.get_exemplar_data()
+            if exemplar_data:
+                flat_ex_x = torch.FloatTensor(np.concatenate([np.array(s) for s in exemplar_data]))
+                flat_ex_y = torch.LongTensor(np.concatenate([np.full(len(s), exemplar_labels[i]) for i, s in enumerate(exemplar_data)]))
+                
+                # Balanced replay: target 20% of batch
+                num_new = len(X_train)
+                num_old = len(flat_ex_x)
+                if num_old > 0 and num_new > num_old:
+                    target_old = int(num_new * 0.20 / 0.80)
+                    rep = min(max(1, target_old // num_old), 500)
+                    if rep > 1:
+                        flat_ex_x = flat_ex_x.repeat(rep, 1)
+                        flat_ex_y = flat_ex_y.repeat(rep)
+                        
+                is_old.extend([True] * len(flat_ex_x))
+                X_train = torch.cat([X_train, flat_ex_x])
+                y_train = torch.cat([y_train, flat_ex_y])
+                
+        is_old_mask = torch.BoolTensor(is_old)
+
+        # ── 5. Class weights (tính trên TẤT CẢ dữ liệu sau khi ghép) ────
         self.model = model_to_device(self.model, self.device)
         self.model.train()
 
-        # Tính toán trọng số trên toàn bộ các class đã học (0 -> current_max)
         num_classes_current = self.model.fc.out_features
         class_weights = torch.ones(num_classes_current).to(self.device)
         unique_y, counts_y = torch.unique(y_train, return_counts=True)
         
-        # Trọng số cho các lớp mới (dựa trên phân phối thực tế trong task)
         total_samples = len(y_train)
-        num_new_classes = len(unique_y)
+        num_classes_in_batch = len(unique_y)
         
         for cls, count in zip(unique_y, counts_y):
             if cls < num_classes_current:
-                # Công thức căn bậc hai để làm dịu trọng số (Square Root Smoothing)
-                raw_w = total_samples / (num_new_classes * count.float())
+                raw_w = total_samples / (num_classes_in_batch * count.float())
                 class_weights[cls] = torch.pow(raw_w, 0.5)
-        
-        # Đối với các lớp cũ (không có trong y_train nhưng có trong Buffer):
-        # Tăng trọng số (boosting) để cứu vớt Recall của lớp cũ, giúp tăng Macro-F1
-        if self.task_id_old > 0:
-            for c in range(num_classes_current):
-                if c not in unique_y:
-                    class_weights[c] = 3.0  # Boost x3 cho các lớp cũ để bù đắp sự thiếu hụt số lượng mẫu
-                    
-        # Ở đây ta chuẩn hóa để giá trị trung bình là 1.0
+                
         class_weights = class_weights / class_weights.mean()
 
         optimizer = optim.SGD(self.model.parameters(), lr=lr,
                               momentum=0.9, weight_decay=1e-5)
 
+        # ── Định nghĩa chung DataLoader ────────────────────────────────
+        class _DS(torch.utils.data.Dataset):
+            def __init__(self, x, y, mask):
+                self.x, self.y, self.m = x, y, mask
+            def __len__(self):  return len(self.y)
+            def __getitem__(self, i): return self.x[i], self.y[i], self.m[i]
+
+        loader = DataLoader(_DS(X_train, y_train, is_old_mask),
+                            batch_size=batch_size, shuffle=True)
+
         # ══════════════════════════════════════════════════════════════
         # NHÁNH TRAINING TÙY THEO METHOD
         # ══════════════════════════════════════════════════════════════
         if self.method in ('der', 'der++'):
-            # ── DER Dynamic Expansion Training (port tu SPCIL DERNet) ────
-            # Buoc 1: Dong bang backbone cu, chi train backbone moi nhat + fc + aux_fc
+            # ── DER Dynamic Expansion Training ────
             if task_id > 0:
                 self.model.freeze_old_backbones()
+                # FC Warmup (Two-stage training): Đóng băng backbone mới trong 2 round đầu
+                if round_in_task < 2:
+                    for param in self.model.convnets[-1].parameters():
+                        param.requires_grad = False
+                    # logger.info(f"Edge {self.edge_id}: [DER] FC Warmup - Froze new backbone (round {round_in_task})")
 
-            # Buoc 2: Them du lieu Exemplar tu cac task cu (chong quen classifier)
-            exemplar_data, exemplar_labels = self.exemplar_manager.get_exemplar_data()
-            if exemplar_data:
-                flat_ex_x = torch.FloatTensor(
-                    np.concatenate([np.array(s) for s in exemplar_data])
-                )
-                flat_ex_y = torch.LongTensor(
-                    np.concatenate([
-                        np.full(len(s), exemplar_labels[i])
-                        for i, s in enumerate(exemplar_data)
-                    ])
-                )
-                
-                # Cân bằng (balanced replay) giong iCaRL
-                num_new = len(X_train)
-                num_old = len(flat_ex_x)
-                if num_old > 0 and num_new > num_old:
-                    target_old = int(num_new * 0.20 / 0.80)
-                    rep = min(max(1, target_old // num_old), 500)  # Tăng trần lặp để cứu catastrophic forgetting
-                    if rep > 1:
-                        flat_ex_x = flat_ex_x.repeat(rep, 1)
-                        flat_ex_y = flat_ex_y.repeat(rep)
-                
-                X_train = torch.cat([X_train, flat_ex_x])
-                y_train = torch.cat([y_train, flat_ex_y])
-
-            dataset = torch.utils.data.TensorDataset(X_train, y_train)
-            loader  = DataLoader(dataset, batch_size=batch_size, shuffle=True)
-
-            # So classes truoc task nay (known_classes)
             known_classes = self.model.fc.out_features - len(task_classes)
 
             for epoch in range(epochs):
                 self.model.train()
-                for batch_x, batch_y in loader:
+                for batch_x, batch_y, batch_mask in loader:
                     batch_x = batch_x.to(self.device)
                     batch_y = batch_y.to(self.device)
+                    batch_mask = batch_mask.to(self.device)
 
                     logits, aux_logits = self.model(batch_x)
 
-                    # Loss chinh: CE tren toan bo classes
-                    loss_clf = torch.nn.functional.cross_entropy(
-                        logits, batch_y, weight=class_weights
+                    # Distillation Loss: Thay thế CE thường bằng Distillation để bảo tồn old classes
+                    old_outputs = None
+                    if self.old_model is not None:
+                        old_outputs, _ = self.old_model(batch_x)
+
+                    loss_clf = distillation_loss(
+                        logits, old_outputs, batch_y,
+                        self.model.fc.out_features,
+                        self.old_model.fc.out_features if self.old_model else 0,
+                        self.device,
+                        is_old_mask=batch_mask,
+                        weights=class_weights
                     )
 
-                    # Loss phu (aux): relabel new classes 1..n, old -> 0 (theo SPCIL)
+                    # Loss phu (aux): cho backbone mới
                     aux_targets = batch_y.clone()
                     aux_targets = torch.where(
                         aux_targets - known_classes + 1 > 0,
@@ -315,12 +321,6 @@ class EdgeServer:
 
             # Buoc 3: Cap nhat memory (sau khi ket thuc task)
             if is_last_round:
-                # Da loai bo weight_align khoi DER vi gay tac dung nguoc tren tabular data
-                # (Macro-F1 rớt từ 62% xuống 51% sau khi align)
-                
-
-                
-                # Cap nhat exemplar memory tuong tu iCaRL
                 total_learned = len(self.exemplar_manager.exemplar_set) + len(task_classes)
                 m = self.exemplar_manager.memory_size // total_learned
                 self.exemplar_manager.reduce_exemplar_sets(m)
@@ -338,55 +338,11 @@ class EdgeServer:
             logger.info(
                 f"Edge {self.edge_id}: [DER] Task {task_id} done. "
                 f"Backbones: {len(self.model.convnets)} | "
-                f"Total features: {self.model.total_feature_dim} | "
                 f"Memory: {self.exemplar_manager.total_stored_samples}"
             )
 
         else:
-            # ── iCaRL Training Loop ────────────────────────────────────
-            # 5a. Thêm exemplar replay + balanced oversampling
-            exemplar_data, exemplar_labels = self.exemplar_manager.get_exemplar_data()
-            is_old = [False] * num_new_samples
-
-            if exemplar_data:
-                flat_ex_x = torch.FloatTensor(
-                    np.concatenate([np.array(s) for s in exemplar_data])
-                )
-                flat_ex_y = torch.LongTensor(
-                    np.concatenate([
-                        np.full(len(s), exemplar_labels[i])
-                        for i, s in enumerate(exemplar_data)
-                    ])
-                )
-                # Balanced replay: target 20% of batch, cap 500x
-                num_new = len(X_train)
-                num_old = len(flat_ex_x)
-                if num_old > 0 and num_new > num_old:
-                    target_old = int(num_new * 0.20 / 0.80)
-                    rep = min(max(1, target_old // num_old), 500)  # Tăng trần lặp để cứu catastrophic forgetting
-                    if rep > 1:
-                        logger.info(
-                            f"Edge {self.edge_id}: Balanced replay "
-                            f"{num_old}->{num_old*rep} ({rep}x) for {num_new} new samples."
-                        )
-                        flat_ex_x = flat_ex_x.repeat(rep, 1)
-                        flat_ex_y = flat_ex_y.repeat(rep)
-
-                is_old.extend([True] * len(flat_ex_x))
-                X_train = torch.cat([X_train, flat_ex_x])
-                y_train = torch.cat([y_train, flat_ex_y])
-
-            is_old_mask = torch.BoolTensor(is_old)
-
-            class _DS(torch.utils.data.Dataset):
-                def __init__(self, x, y, mask):
-                    self.x, self.y, self.m = x, y, mask
-                def __len__(self):  return len(self.y)
-                def __getitem__(self, i): return self.x[i], self.y[i], self.m[i]
-
-            loader = DataLoader(_DS(X_train, y_train, is_old_mask),
-                                batch_size=batch_size, shuffle=True)
-
+            # ── iCaRL / WA Training Loop ────────────────────────────────────
             for epoch in range(epochs):
                 for features, targets, mask in loader:
                     features = features.to(self.device)
